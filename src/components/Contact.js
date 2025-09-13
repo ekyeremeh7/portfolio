@@ -233,9 +233,9 @@ const Contact = () => {
     
     try {
       // EmailJS configuration - you'll need to replace these with your actual values
-      const serviceId = 'YOUR_SERVICE_ID';
-      const templateId = 'YOUR_TEMPLATE_ID';
-      const publicKey = 'YOUR_PUBLIC_KEY';
+      const serviceId = 'service_e3gahu8';
+      const templateId = 'template_x12lsfr';
+      const publicKey = 'X3VUmMOE_07rbZGfI';
       
       // Send email using EmailJS
       await emailjs.send(serviceId, templateId, {
