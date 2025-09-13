@@ -152,7 +152,7 @@ const Footer = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Emmanuel Kyeremeh
+          Emmanuel Kwabena Kyeremeh
         </FooterLogo>
 
         <FooterDescription
