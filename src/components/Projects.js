@@ -85,6 +85,11 @@ const ProjectImage = styled.div`
 
 const ProjectContent = styled.div`
   padding: 1.5rem;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+  }
 `;
 
 const ProjectTitle = styled.h3`
@@ -120,6 +125,12 @@ const TechTag = styled.span`
 const ProjectLinks = styled.div`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.8rem;
+    justify-content: center;
+  }
 `;
 
 const ProjectLink = styled(motion.a)`
@@ -135,10 +146,18 @@ const ProjectLink = styled(motion.a)`
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover {
     background: rgba(0, 212, 255, 0.2);
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    gap: 0.4rem;
   }
 `;
 
