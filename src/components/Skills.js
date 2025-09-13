@@ -140,7 +140,8 @@ const Skills = () => {
         { name: "Shorebird", icon: <FaCode /> },
         { name: "Sentry", icon: <FaServer /> },
         { name: "Google Play Store", icon: <FaMobile /> },
-        { name: "Apple App Store", icon: <FaMobile /> }
+        { name: "Apple App Store", icon: <FaMobile /> },
+        { name: "Huawei AppGallery Connect", icon: <FaMobile /> }
       ]
     }
   ];
