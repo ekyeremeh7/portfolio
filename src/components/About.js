@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import profilePicture from '../assets/profile-picture.jpg';
 
 const AboutSection = styled.section`
   padding: 5rem 2rem;
@@ -205,7 +206,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <img 
-              src="/profile-picture.jpg" 
+              src={profilePicture} 
               alt="Emmanuel Kwabena Kyeremeh" 
               style={{
                 width: '100%',
