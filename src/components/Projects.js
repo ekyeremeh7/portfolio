@@ -26,6 +26,13 @@ const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-items: center;
+    padding: 0 1rem;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -40,6 +47,11 @@ const ProjectCard = styled(motion.div)`
     transform: translateY(-10px);
     border-color: rgba(0, 212, 255, 0.3);
     box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 400px;
   }
 `;
 
