@@ -11,6 +11,13 @@ const HeroSection = styled.section`
   position: relative;
   padding: 0 2rem;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    min-height: auto;
+    align-items: flex-start;
+    padding-top: 4rem;
+  }
 `;
 
 const HeroContainer = styled.div`
@@ -30,6 +37,10 @@ const HeroContainer = styled.div`
 
 const HeroContent = styled.div`
   z-index: 2;
+
+  @media (max-width: 768px) {
+    padding-top: 1rem;
+  }
 `;
 
 const Greeting = styled(motion.div)`
@@ -50,7 +61,13 @@ const Name = styled(motion.h1)`
   line-height: 1.2;
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+    line-height: 1.1;
   }
 `;
 
