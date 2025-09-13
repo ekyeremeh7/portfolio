@@ -1,7 +1,6 @@
 {
   "name": "portfolio-website",
   "version": "1.0.0",
-  "homepage": "https://ekyeremeh7.github.io/portfolio",
   "description": "Emmanuel Kwabena Kyeremeh's Portfolio Website",
   "private": true,
   "dependencies": {
@@ -23,7 +22,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploy:github": "npm run build:github && npm run deploy && npm run restore:homepage",
+    "build:github": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json')); delete pkg.homepage; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));\" && npm run build",
+    "restore:homepage": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json')); pkg.homepage='https://ekyeremeh7.github.io/portfolio'; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));\""
   },
   "eslintConfig": {
     "extends": [
