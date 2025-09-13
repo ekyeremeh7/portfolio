@@ -133,7 +133,7 @@ const About = () => {
     { number: "6+", label: "Years Experience" },
     { number: "10+", label: "Applications Built" },
     { number: "15+", label: "Technologies" },
-    { number: "1000+", label: "App Downloads" }
+    { number: "1k+", label: "App Downloads" }
   ];
 
   const previewSkills = ["Flutter", "Dart", "React.js", "Next.js", "Firebase", "JavaScript"];
