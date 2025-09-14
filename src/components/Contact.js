@@ -245,7 +245,9 @@ const Contact = () => {
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        to_email: 'ekyeremeh7@gmail.com'
+        to_email: 'ekyeremeh7@gmail.com',
+        current_date: new Date().toLocaleDateString(),
+        current_time: new Date().toLocaleTimeString()
       }, publicKey);
       
       // Success toast
