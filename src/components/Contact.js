@@ -5,6 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
+import { useToast } from './Toast';
 
 const ContactSection = styled.section`
   padding: 5rem 2rem;
@@ -212,6 +213,7 @@ const SubmitButton = styled(motion.button)`
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -246,12 +248,23 @@ const Contact = () => {
         to_email: 'ekyeremeh7@gmail.com'
       }, publicKey);
       
-      // Success
-      alert('Thank you for your message! I\'ll get back to you soon.');
+      // Success toast
+      showToast(
+        `Thank you for your message, ${formData.name}! I've received your message about "${formData.subject}" and will get back to you soon.`,
+        'success',
+        'Message Sent Successfully! 🎉'
+      );
+      
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error sending email:', error);
-      alert('Sorry, there was an error sending your message. Please try again or contact me directly at ekyeremeh7@gmail.com');
+      
+      // Error toast
+      showToast(
+        'Sorry, there was an error sending your message. Please try again or contact me directly at ekyeremeh7@gmail.com',
+        'error',
+        'Message Failed to Send'
+      );
     } finally {
       setIsSubmitting(false);
     }
