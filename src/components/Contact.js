@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
 const ContactSection = styled.section`
@@ -327,6 +327,15 @@ const Contact = () => {
               whileTap={{ scale: 0.9 }}
             >
               <FaLinkedin />
+            </SocialLink>
+            <SocialLink 
+              href="https://ekyeremeh7.onrender.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaExternalLinkAlt />
             </SocialLink>
           </SocialLinks>
         </ContactInfo>

@@ -214,7 +214,7 @@ const Projects = () => {
       description: "Modern, responsive portfolio website built with React.js showcasing professional experience, projects, and skills with smooth animations.",
       tech: ["React.js", "Styled Components", "Framer Motion", "Responsive Design"],
       github: "https://github.com/ekyeremeh7/portfolio",
-      demo: "https://ekyeremeh7.github.io/portfolio",
+      demo: "https://ekyeremeh7.onrender.com",
       webOnly: true,
       icon: "🌐"
     },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -333,6 +333,15 @@ const Hero = () => {
               whileTap={{ scale: 0.9 }}
             >
               <FaEnvelope />
+            </SocialLink>
+            <SocialLink 
+              href="https://ekyeremeh7.onrender.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaExternalLinkAlt />
             </SocialLink>
           </SocialLinks>
         </HeroContent>
