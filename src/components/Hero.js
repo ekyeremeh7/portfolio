@@ -243,6 +243,29 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Function to handle resume download
+  const handleResumeDownload = (e) => {
+    e.preventDefault();
+
+    // Path to your resume in the public folder
+    const resumeUrl = '/Emmanuel_Kwabena_Kyeremeh.pdf';
+
+    // Create a temporary anchor element
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = 'Emmanuel_Kwabena_Kyeremeh.pdf';
+    document.body.appendChild(link);
+
+    // Trigger the download
+    link.click();
+
+    // Clean up
+    document.body.removeChild(link);
+
+    // Fallback: open in new tab if download doesn't work
+    window.open(resumeUrl, '_blank');
+  };
+
   return (
     <HeroSection id="home">
       <HeroContainer>
@@ -254,7 +277,7 @@ const Hero = () => {
           >
             Hello, I'm
           </Greeting>
-          
+
           <Name
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -262,7 +285,7 @@ const Hero = () => {
           >
             Emmanuel Kwabena Kyeremeh
           </Name>
-          
+
           <Title
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -270,7 +293,7 @@ const Hero = () => {
           >
             {currentText}<span style={{ color: '#00d4ff' }}>|</span>
           </Title>
-          
+
           <Description
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -279,23 +302,23 @@ const Hero = () => {
             Software Engineer | Flutter & React Developer | Mobile (Android/iOS) & Web App Specialist.
             Passionate about building impactful mobile and web applications with over 6 years of hands-on coding experience.
           </Description>
-          
+
           <ButtonGroup
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <Button 
-              href="#contact" 
+            <Button
+              href="#contact"
               className="primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Get In Touch
             </Button>
-            <Button 
-              href="/Emmanuel Kwabena Kyeremeh.pdf" 
-              download
+            <Button
+              href="/Emmanuel_Kwabena_Kyeremeh.pdf"
+              onClick={handleResumeDownload}
               className="secondary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -303,40 +326,40 @@ const Hero = () => {
               <FaDownload /> Resume
             </Button>
           </ButtonGroup>
-          
+
           <SocialLinks
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
           >
-            <SocialLink 
-              href="https://github.com/ekyeremeh7" 
-              target="_blank" 
+            <SocialLink
+              href="https://github.com/ekyeremeh7"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <FaGithub />
             </SocialLink>
-            <SocialLink 
-              href="https://linkedin.com/in/ekyeremeh7" 
-              target="_blank" 
+            <SocialLink
+              href="https://linkedin.com/in/ekyeremeh7"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <FaLinkedin />
             </SocialLink>
-            <SocialLink 
+            <SocialLink
               href="mailto:ekyeremeh7@gmail.com"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <FaEnvelope />
             </SocialLink>
-            <SocialLink 
-              href="https://ekyeremeh7.onrender.com" 
-              target="_blank" 
+            <SocialLink
+              href="https://ekyeremeh7.onrender.com"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -366,7 +389,7 @@ const Hero = () => {
               EK
             </div>
           </ImageContainer>
-          
+
           <FloatingElements>
             <FloatingElement
               animate={{ y: [-10, 10, -10] }}
