@@ -109,7 +109,8 @@ const Skills = () => {
         { name: "Riverpod", icon: <FaCode /> },
         { name: "Provider", icon: <FaCode /> },
         { name: "Hive", icon: <FaDatabase /> },
-        { name: "Firebase", icon: <FaServer /> }
+        { name: "Firebase", icon: <FaServer /> },
+        { name: "Supabase", icon: <FaServer /> }
       ]
     },
     {
