@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import profilePicture from '../assets/profile-picture.jpg';
+import profilePicture from '../assets/profile-picture.png';
 
 const AboutSection = styled.section`
   padding: 5rem 2rem;
