@@ -5,8 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
-import accraaaMobileLogo from '../assets/projects/accraaa-mobile.png';
-import accraaaWebLogo from '../assets/projects/accraaa-web.png';
+import accraaaLogo from '../assets/projects/accraaa.png';
 import dodoWorkplaceLogo from '../assets/projects/dodo-workplace.png';
 import dodoMessengerLogo from '../assets/projects/dodo-messenger.png';
 import myHealthLogo from '../assets/projects/myhealth.png';
@@ -184,7 +183,7 @@ const Projects = () => {
       github: "#",
       demo: "https://play.google.com/store/apps/details?id=com.company.accraaa",
       iosDemo: "https://apps.apple.com/us/app/accraaa/id6754570414",
-      logo: accraaaMobileLogo,
+      logo: accraaaLogo,
       icon: "🌃"
     },
     {
@@ -194,7 +193,7 @@ const Projects = () => {
       github: "#",
       demo: "https://accraaa.com",
       webOnly: true,
-      logo: accraaaWebLogo,
+      logo: accraaaLogo,
       icon: "🖥️"
     },
     {
