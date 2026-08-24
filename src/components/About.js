@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import profilePicture from '../assets/profile-picture.png';
+import profilePicture from '../assets/profile-picture.jpg';
 import { borders, colors, gradients, gradientText, media, radii, surfaces, tints } from '../theme';
 
 const AboutSection = styled.section`
@@ -207,6 +207,7 @@ const About = () => {
             <img 
               src={profilePicture} 
               alt="Emmanuel Kwabena Kyeremeh" 
+              loading="lazy"
               style={{
                 width: '100%',
                 height: '100%',

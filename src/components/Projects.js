@@ -5,6 +5,11 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
+import accraaaMobileLogo from '../assets/projects/accraaa-mobile.png';
+import accraaaWebLogo from '../assets/projects/accraaa-web.png';
+import dodoWorkplaceLogo from '../assets/projects/dodo-workplace.png';
+import dodoMessengerLogo from '../assets/projects/dodo-messenger.png';
+import myHealthLogo from '../assets/projects/myhealth.png';
 
 const ProjectsSection = styled.section`
   padding: 5rem 2rem;
@@ -79,6 +84,14 @@ const ProjectImage = styled.div`
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
+`;
+
+const ProjectLogo = styled.img`
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 22px;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
 `;
 
 const ProjectContent = styled.div`
@@ -171,6 +184,7 @@ const Projects = () => {
       github: "#",
       demo: "https://play.google.com/store/apps/details?id=com.company.accraaa",
       iosDemo: "https://apps.apple.com/us/app/accraaa/id6754570414",
+      logo: accraaaMobileLogo,
       icon: "🌃"
     },
     {
@@ -180,6 +194,7 @@ const Projects = () => {
       github: "#",
       demo: "https://accraaa.com",
       webOnly: true,
+      logo: accraaaWebLogo,
       icon: "🖥️"
     },
     {
@@ -189,6 +204,7 @@ const Projects = () => {
       github: "#",
       demo: "https://play.google.com/store/apps/details?id=com.company.dodo",
       iosDemo: "https://apps.apple.com/us/app/dodo-workplace/id6517353759",
+      logo: dodoWorkplaceLogo,
       icon: "💼"
     },
     {
@@ -198,6 +214,7 @@ const Projects = () => {
       github: "#",
       demo: "https://play.google.com/store/apps/details?id=com.company.dodoMessenger",
       iosDemo: "https://apps.apple.com/us/app/dodo-messenger/id6738318360",
+      logo: dodoMessengerLogo,
       icon: "💬"
     },
     {
@@ -207,6 +224,7 @@ const Projects = () => {
       github: "#",
       demo: "https://play.google.com/store/apps/details?id=com.ehealth.myhealth",
       iosDemo: "https://apps.apple.com/gh/app/my-health/id6463126195",
+      logo: myHealthLogo,
       icon: "🏥"
     },
     {
@@ -264,7 +282,15 @@ const Projects = () => {
             whileHover={{ scale: 1.02 }}
           >
             <ProjectImage>
-              {project.icon}
+              {project.logo ? (
+                <ProjectLogo
+                  src={project.logo}
+                  alt={`${project.title} logo`}
+                  loading="lazy"
+                />
+              ) : (
+                project.icon
+              )}
             </ProjectImage>
             
             <ProjectContent>
