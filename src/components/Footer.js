@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaHeart, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
 
 const FooterContainer = styled.footer`
@@ -99,21 +99,7 @@ const Copyright = styled.div`
   font-size: 0.9rem;
   padding-top: 2rem;
   border-top: 1px solid ${borders.subtle};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-
-  ${media.tablet} {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-`;
-
-const HeartIcon = styled.span`
-  color: ${colors.secondary};
-  animation: pulse 2s infinite;
+  text-align: center;
 `;
 
 const Footer = () => {
@@ -207,11 +193,7 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 1.2 }}
           viewport={{ once: true }}
         >
-          © {currentYear} Emmanuel Kwabena Kyeremeh. Made with{' '}
-          <HeartIcon>
-            <FaHeart />
-          </HeartIcon>{' '}
-          using React
+          © {currentYear} Emmanuel Kwabena Kyeremeh. All rights reserved.
         </Copyright>
       </FooterContent>
     </FooterContainer>
