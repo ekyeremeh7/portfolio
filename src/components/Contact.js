@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import { useToast } from './Toast';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
 
 const ContactSection = styled.section`
   padding: 5rem 2rem;
@@ -18,10 +19,7 @@ const SectionTitle = styled(motion.h2)`
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #00d4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText()}
 `;
 
 const ContactContainer = styled.div`
@@ -30,7 +28,7 @@ const ContactContainer = styled.div`
   gap: 4rem;
   align-items: start;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -41,12 +39,12 @@ const ContactInfo = styled.div``;
 const ContactTitle = styled.h3`
   font-size: 1.5rem;
   font-weight: 600;
-  color: #00d4ff;
+  color: ${colors.primary};
   margin-bottom: 2rem;
 `;
 
 const ContactDescription = styled.p`
-  color: #ccc;
+  color: ${colors.textMuted};
   line-height: 1.6;
   margin-bottom: 2rem;
 `;
@@ -57,14 +55,14 @@ const ContactItem = styled(motion.div)`
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.md};
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: rgba(0, 212, 255, 0.3);
+    border-color: ${borders.primary};
     transform: translateX(5px);
   }
 `;
@@ -72,12 +70,12 @@ const ContactItem = styled(motion.div)`
 const ContactIcon = styled.div`
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
-  border-radius: 50%;
+  background: ${gradients.accent};
+  border-radius: ${radii.round};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000;
+  color: ${colors.onAccent};
   font-weight: bold;
 `;
 
@@ -87,12 +85,12 @@ const ContactDetails = styled.div`
 
 const ContactLabel = styled.div`
   font-size: 0.9rem;
-  color: #888;
+  color: ${colors.textSubtle};
   margin-bottom: 0.2rem;
 `;
 
 const ContactValue = styled.div`
-  color: #ffffff;
+  color: ${colors.text};
   font-weight: 500;
 `;
 
@@ -105,27 +103,27 @@ const SocialLinks = styled.div`
 const SocialLink = styled(motion.a)`
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  border-radius: ${radii.round};
+  background: ${surfaces.overlay};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: ${colors.text};
   text-decoration: none;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 
   &:hover {
-    background: linear-gradient(135deg, #00d4ff, #ff0096);
+    background: ${gradients.accent};
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+    box-shadow: ${shadows.accentSoft};
   }
 `;
 
 const ContactForm = styled.form`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.lg};
   padding: 2rem;
   backdrop-filter: blur(10px);
 `;
@@ -136,7 +134,7 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
   display: block;
-  color: #ffffff;
+  color: ${colors.text};
   margin-bottom: 0.5rem;
   font-weight: 500;
 `;
@@ -144,31 +142,31 @@ const Label = styled.label`
 const Input = styled.input`
   width: 100%;
   padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #ffffff;
+  background: ${surfaces.overlay};
+  border: 1px solid ${borders.strong};
+  border-radius: ${radii.sm};
+  color: ${colors.text};
   font-size: 1rem;
   transition: all 0.3s ease;
 
   &:focus {
     outline: none;
-    border-color: #00d4ff;
-    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+    border-color: ${colors.primary};
+    box-shadow: 0 0 0 2px ${borders.primarySubtle};
   }
 
   &::placeholder {
-    color: #888;
+    color: ${colors.textSubtle};
   }
 `;
 
 const TextArea = styled.textarea`
   width: 100%;
   padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #ffffff;
+  background: ${surfaces.overlay};
+  border: 1px solid ${borders.strong};
+  border-radius: ${radii.sm};
+  color: ${colors.text};
   font-size: 1rem;
   min-height: 120px;
   resize: vertical;
@@ -177,22 +175,22 @@ const TextArea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: #00d4ff;
-    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+    border-color: ${colors.primary};
+    box-shadow: 0 0 0 2px ${borders.primarySubtle};
   }
 
   &::placeholder {
-    color: #888;
+    color: ${colors.textSubtle};
   }
 `;
 
 const SubmitButton = styled(motion.button)`
   width: 100%;
   padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
+  background: ${gradients.accent};
   border: none;
-  border-radius: 8px;
-  color: #000;
+  border-radius: ${radii.sm};
+  color: ${colors.onAccent};
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -200,7 +198,7 @@ const SubmitButton = styled(motion.button)`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+    box-shadow: ${shadows.accentSoft};
   }
 
   &:disabled {
@@ -286,7 +284,7 @@ const Contact = () => {
     {
       icon: <FaMapMarkerAlt />,
       label: 'Location',
-      value: 'Layoja Court, Madina, Accra, Ghana'
+      value: 'Accra, Ghana'
     }
   ];
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaLinkedin } from 'react-icons/fa';
+import { borders, colors, gradients, gradientText, media, radii, surfaces } from '../theme';
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -9,9 +10,9 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.95);
+  background: ${surfaces.header};
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid ${borders.subtle};
   transition: all 0.3s ease;
 `;
 
@@ -28,10 +29,7 @@ const Nav = styled.nav`
 const Logo = styled(motion.div)`
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText(gradients.accent)}
 `;
 
 const NavLinks = styled.ul`
@@ -39,12 +37,12 @@ const NavLinks = styled.ul`
   list-style: none;
   gap: 2rem;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     position: fixed;
     top: 70px;
     left: 0;
     right: 0;
-    background: rgba(10, 10, 10, 0.98);
+    background: ${surfaces.headerScrolled};
     flex-direction: column;
     padding: 2rem;
     transform: ${props => props.isOpen ? 'translateX(0)' : 'translateX(-100%)'};
@@ -55,14 +53,14 @@ const NavLinks = styled.ul`
 
 const NavLink = styled.li`
   a {
-    color: #ffffff;
+    color: ${colors.text};
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
 
     &:hover {
-      color: #00d4ff;
+      color: ${colors.primary};
     }
 
     &::after {
@@ -72,7 +70,7 @@ const NavLink = styled.li`
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(135deg, #00d4ff, #ff0096);
+      background: ${gradients.accent};
       transition: width 0.3s ease;
     }
 
@@ -82,15 +80,42 @@ const NavLink = styled.li`
   }
 `;
 
+const NavActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const LinkedInLink = styled(motion.a)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: ${radii.round};
+  background: ${surfaces.raised};
+  border: 1px solid ${borders.medium};
+  color: ${colors.text};
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${gradients.accent};
+    color: ${colors.onAccent};
+    border-color: transparent;
+  }
+`;
+
 const MobileMenuButton = styled.button`
   display: none;
   background: none;
   border: none;
-  color: #ffffff;
+  color: ${colors.text};
   font-size: 1.5rem;
   cursor: pointer;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     display: block;
   }
 `;
@@ -118,7 +143,7 @@ const Header = () => {
 
   return (
     <HeaderContainer style={{
-      background: isScrolled ? 'rgba(10, 10, 10, 0.98)' : 'rgba(10, 10, 10, 0.95)'
+      background: isScrolled ? surfaces.headerScrolled : surfaces.header
     }}>
       <Nav>
         <Logo
@@ -150,9 +175,26 @@ const Header = () => {
           </NavLink>
         </NavLinks>
 
-        <MobileMenuButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-        </MobileMenuButton>
+        <NavActions>
+          <LinkedInLink
+            href="https://linkedin.com/in/ekyeremeh7"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <FaLinkedin />
+          </LinkedInLink>
+
+          <MobileMenuButton
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </MobileMenuButton>
+        </NavActions>
       </Nav>
     </HeaderContainer>
   );

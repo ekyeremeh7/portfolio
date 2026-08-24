@@ -12,15 +12,22 @@ import {
   FaDatabase,
   FaMobile,
   FaServer,
-  FaCode
+  FaCode,
+  FaCreditCard,
+  FaVideo,
+  FaMapMarkedAlt,
+  FaGithub,
+  FaChartLine,
+  FaCloud
 } from 'react-icons/fa';
+import { borders, colors, gradientText, radii, surfaces, tints } from '../theme';
 
 const SkillsSection = styled.section`
   padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 20px;
+  background: ${surfaces.subtle};
+  border-radius: ${radii.xl};
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
@@ -30,10 +37,7 @@ const SectionTitle = styled(motion.h2)`
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #00d4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText()}
 `;
 
 const SkillsGrid = styled.div`
@@ -43,9 +47,9 @@ const SkillsGrid = styled.div`
 `;
 
 const SkillCategory = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.lg};
   padding: 2rem;
   backdrop-filter: blur(10px);
 `;
@@ -53,7 +57,7 @@ const SkillCategory = styled(motion.div)`
 const CategoryTitle = styled.h3`
   font-size: 1.5rem;
   font-weight: 600;
-  color: #00d4ff;
+  color: ${colors.primary};
   margin-bottom: 1.5rem;
   text-align: center;
 `;
@@ -70,14 +74,14 @@ const SkillItem = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 10px;
+  background: ${tints.primaryFaint};
+  border: 1px solid ${borders.primarySubtle};
+  border-radius: ${radii.md};
   min-width: 80px;
   transition: all 0.3s ease;
 
   &:hover {
-    background: rgba(0, 212, 255, 0.2);
+    background: ${tints.primarySoft};
     transform: translateY(-5px);
   }
 `;
@@ -85,12 +89,12 @@ const SkillItem = styled(motion.div)`
 const SkillIcon = styled.div`
   font-size: 2rem;
   margin-bottom: 0.5rem;
-  color: #00d4ff;
+  color: ${colors.primary};
 `;
 
 const SkillName = styled.span`
   font-size: 0.8rem;
-  color: #ffffff;
+  color: ${colors.text};
   font-weight: 500;
   text-align: center;
 `;
@@ -105,9 +109,10 @@ const Skills = () => {
       skills: [
         { name: "Flutter", icon: <FaMobile /> },
         { name: "Dart", icon: <FaCode /> },
-        { name: "GetX", icon: <FaCode /> },
         { name: "Riverpod", icon: <FaCode /> },
+        { name: "GetX", icon: <FaCode /> },
         { name: "Provider", icon: <FaCode /> },
+        { name: "go_router", icon: <FaCode /> },
         { name: "Hive", icon: <FaDatabase /> },
         { name: "Firebase", icon: <FaServer /> },
         { name: "Supabase", icon: <FaServer /> }
@@ -118,7 +123,9 @@ const Skills = () => {
       skills: [
         { name: "React.js", icon: <FaReact /> },
         { name: "Next.js", icon: <FaReact /> },
+        { name: "TypeScript", icon: <FaCode /> },
         { name: "JavaScript", icon: <FaJs /> },
+        { name: "Tailwind CSS", icon: <FaCss3Alt /> },
         { name: "HTML5", icon: <FaHtml5 /> },
         { name: "CSS3", icon: <FaCss3Alt /> }
       ]
@@ -127,10 +134,16 @@ const Skills = () => {
       title: "Backend & APIs",
       skills: [
         { name: "Firebase", icon: <FaServer /> },
+        { name: "Supabase", icon: <FaServer /> },
+        { name: "PostgreSQL", icon: <FaDatabase /> },
         { name: "Socket.IO", icon: <FaServer /> },
         { name: "REST APIs", icon: <FaServer /> },
         { name: "Cloud Storage", icon: <FaServer /> },
-        { name: "Authentication", icon: <FaServer /> }
+        { name: "Authentication", icon: <FaServer /> },
+        { name: "Paystack", icon: <FaCreditCard /> },
+        { name: "Stripe", icon: <FaCreditCard /> },
+        { name: "Agora", icon: <FaVideo /> },
+        { name: "Google Maps", icon: <FaMapMarkedAlt /> }
       ]
     },
     {
@@ -138,8 +151,14 @@ const Skills = () => {
       skills: [
         { name: "Git", icon: <FaGitAlt /> },
         { name: "CI/CD", icon: <FaServer /> },
+        { name: "GitHub Actions", icon: <FaGithub /> },
+        { name: "Fastlane", icon: <FaCode /> },
         { name: "Shorebird", icon: <FaCode /> },
         { name: "Sentry", icon: <FaServer /> },
+        { name: "Firebase Crashlytics", icon: <FaServer /> },
+        { name: "Vercel", icon: <FaCloud /> },
+        { name: "PostHog", icon: <FaChartLine /> },
+        { name: "Playwright", icon: <FaCode /> },
         { name: "Google Play Store", icon: <FaMobile /> },
         { name: "Apple App Store", icon: <FaMobile /> },
         { name: "Huawei AppGallery Connect", icon: <FaMobile /> }

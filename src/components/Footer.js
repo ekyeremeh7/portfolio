@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaHeart, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
 
 const FooterContainer = styled.footer`
-  background: rgba(0, 0, 0, 0.8);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: ${surfaces.footer};
+  border-top: 1px solid ${borders.subtle};
   padding: 3rem 2rem 2rem;
   text-align: center;
   position: relative;
@@ -18,7 +19,7 @@ const FooterContainer = styled.footer`
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    background: linear-gradient(90deg, transparent, ${colors.primary}, transparent);
   }
 `;
 
@@ -30,15 +31,12 @@ const FooterContent = styled.div`
 const FooterLogo = styled(motion.div)`
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText(gradients.accent)}
   margin-bottom: 1rem;
 `;
 
 const FooterDescription = styled.p`
-  color: #ccc;
+  color: ${colors.textMuted};
   margin-bottom: 2rem;
   max-width: 600px;
   margin-left: auto;
@@ -56,20 +54,20 @@ const SocialLinks = styled.div`
 const SocialLink = styled(motion.a)`
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  border-radius: ${radii.round};
+  background: ${surfaces.overlay};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: ${colors.text};
   text-decoration: none;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 
   &:hover {
-    background: linear-gradient(135deg, #00d4ff, #ff0096);
+    background: ${gradients.accent};
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+    box-shadow: ${shadows.accentSoft};
   }
 `;
 
@@ -80,41 +78,41 @@ const FooterLinks = styled.div`
   margin-bottom: 2rem;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     gap: 1rem;
   }
 `;
 
 const FooterLink = styled(motion.a)`
-  color: #888;
+  color: ${colors.textSubtle};
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 
   &:hover {
-    color: #00d4ff;
+    color: ${colors.primary};
   }
 `;
 
 const Copyright = styled.div`
-  color: #666;
+  color: ${colors.textFaint};
   font-size: 0.9rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid ${borders.subtle};
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     flex-direction: column;
     gap: 0.2rem;
   }
 `;
 
 const HeartIcon = styled.span`
-  color: #ff0096;
+  color: ${colors.secondary};
   animation: pulse 2s infinite;
 `;
 
@@ -161,7 +159,7 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Software Engineer specializing in Flutter & React development. Let's build cutting-edge mobile and web applications together!
+          CTO at Accraaa and Senior Software Engineer, Mobile at Dodo Technologies, specializing in Flutter & React. Let's build cutting-edge mobile and web applications together!
         </FooterDescription>
 
         <SocialLinks>

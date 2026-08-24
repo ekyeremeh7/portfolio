@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
+import { colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -12,7 +13,7 @@ const HeroSection = styled.section`
   padding: 0 2rem;
   overflow: hidden;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     padding: 2rem 1rem;
     min-height: auto;
     align-items: flex-start;
@@ -28,7 +29,7 @@ const HeroContainer = styled.div`
   gap: 4rem;
   align-items: center;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2rem;
@@ -38,14 +39,14 @@ const HeroContainer = styled.div`
 const HeroContent = styled.div`
   z-index: 2;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     padding-top: 1rem;
   }
 `;
 
 const Greeting = styled(motion.div)`
   font-size: 1.2rem;
-  color: #00d4ff;
+  color: ${colors.primary};
   margin-bottom: 1rem;
   font-weight: 500;
 `;
@@ -54,18 +55,15 @@ const Name = styled(motion.h1)`
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff, #00d4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText()}
   line-height: 1.2;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     font-size: 2.2rem;
     line-height: 1.1;
   }
 
-  @media (max-width: 480px) {
+  ${media.mobile} {
     font-size: 1.8rem;
     line-height: 1.1;
   }
@@ -73,18 +71,18 @@ const Name = styled(motion.h1)`
 
 const Title = styled(motion.h2)`
   font-size: 1.5rem;
-  color: #888;
+  color: ${colors.textSubtle};
   margin-bottom: 2rem;
   font-weight: 400;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     font-size: 1.2rem;
   }
 `;
 
 const Description = styled(motion.p)`
   font-size: 1.1rem;
-  color: #ccc;
+  color: ${colors.textMuted};
   margin-bottom: 2rem;
   line-height: 1.6;
   max-width: 500px;
@@ -95,7 +93,7 @@ const ButtonGroup = styled(motion.div)`
   gap: 1rem;
   margin-bottom: 2rem;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     justify-content: center;
     flex-wrap: wrap;
   }
@@ -113,23 +111,23 @@ const Button = styled(motion.a)`
   border: 2px solid transparent;
 
   &.primary {
-    background: linear-gradient(135deg, #00d4ff, #ff0096);
-    color: #000;
+    background: ${gradients.accent};
+    color: ${colors.onAccent};
     
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+      box-shadow: ${shadows.accentSoft};
     }
   }
 
   &.secondary {
     background: transparent;
-    color: #00d4ff;
-    border-color: #00d4ff;
+    color: ${colors.primary};
+    border-color: ${colors.primary};
     
     &:hover {
-      background: #00d4ff;
-      color: #000;
+      background: ${colors.primary};
+      color: ${colors.onAccent};
       transform: translateY(-2px);
     }
   }
@@ -143,20 +141,20 @@ const SocialLinks = styled(motion.div)`
 const SocialLink = styled(motion.a)`
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  border-radius: ${radii.round};
+  background: ${surfaces.overlay};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: ${colors.text};
   text-decoration: none;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 
   &:hover {
-    background: linear-gradient(135deg, #00d4ff, #ff0096);
+    background: ${gradients.accent};
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+    box-shadow: ${shadows.accentSoft};
   }
 `;
 
@@ -170,8 +168,8 @@ const HeroImage = styled(motion.div)`
 const ImageContainer = styled.div`
   width: 300px;
   height: 300px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
+  border-radius: ${radii.round};
+  background: ${gradients.accent};
   padding: 4px;
   position: relative;
 
@@ -179,14 +177,14 @@ const ImageContainer = styled.div`
     content: '';
     position: absolute;
     inset: 4px;
-    border-radius: 50%;
-    background: #0a0a0a;
+    border-radius: ${radii.round};
+    background: ${colors.background};
   }
 
   img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: ${radii.round};
     object-fit: cover;
     position: relative;
     z-index: 2;
@@ -207,8 +205,8 @@ const FloatingElement = styled(motion.div)`
   position: absolute;
   width: 20px;
   height: 20px;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
-  border-radius: 50%;
+  background: ${gradients.accent};
+  border-radius: ${radii.round};
   opacity: 0.6;
 
   &:nth-child(1) {
@@ -227,7 +225,7 @@ const FloatingElement = styled(motion.div)`
 
 const Hero = () => {
   const [currentText, setCurrentText] = useState('');
-  const fullText = "Software Engineer | Flutter & React Developer";
+  const fullText = "CTO at Accraaa | Senior Software Engineer, Mobile";
 
   useEffect(() => {
     let index = 0;
@@ -291,7 +289,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {currentText}<span style={{ color: '#00d4ff' }}>|</span>
+            {currentText}<span style={{ color: colors.primary }}>|</span>
           </Title>
 
           <Description
@@ -299,8 +297,9 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Software Engineer | Flutter & React Developer | Mobile (Android/iOS) & Web App Specialist.
-            Passionate about building impactful mobile and web applications with over 6 years of hands-on coding experience.
+            I architect and ship production mobile applications for Android and iOS with Flutter, and build for the
+            web with React and Next.js. Over 8 years of hands-on coding experience, currently leading mobile at
+            Dodo Technologies and technical direction at Accraaa.
           </Description>
 
           <ButtonGroup
@@ -378,13 +377,13 @@ const Hero = () => {
             <div style={{
               width: '100%',
               height: '100%',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #333, #555)',
+              borderRadius: radii.round,
+              background: gradients.placeholder,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '4rem',
-              color: '#00d4ff'
+              color: colors.primary
             }}>
               EK
             </div>

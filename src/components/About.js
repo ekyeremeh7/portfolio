@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import profilePicture from '../assets/profile-picture.png';
+import { borders, colors, gradients, gradientText, media, radii, surfaces, tints } from '../theme';
 
 const AboutSection = styled.section`
   padding: 5rem 2rem;
@@ -17,10 +18,7 @@ const SectionTitle = styled(motion.h2)`
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #00d4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText()}
 `;
 
 const AboutContainer = styled.div`
@@ -29,7 +27,7 @@ const AboutContainer = styled.div`
   gap: 4rem;
   align-items: center;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -40,7 +38,7 @@ const AboutContent = styled.div``;
 const AboutText = styled(motion.p)`
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #ccc;
+  color: ${colors.textMuted};
   margin-bottom: 2rem;
 `;
 
@@ -54,21 +52,21 @@ const StatsContainer = styled.div`
 const StatItem = styled(motion.div)`
   text-align: center;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: ${surfaces.card};
+  border-radius: ${radii.lg};
+  border: 1px solid ${borders.subtle};
   backdrop-filter: blur(10px);
 `;
 
 const StatNumber = styled.div`
   font-size: 2rem;
   font-weight: 700;
-  color: #00d4ff;
+  color: ${colors.primary};
   margin-bottom: 0.5rem;
 `;
 
 const StatLabel = styled.div`
-  color: #888;
+  color: ${colors.textSubtle};
   font-size: 0.9rem;
 `;
 
@@ -81,10 +79,10 @@ const SkillsPreview = styled.div`
 
 const SkillTag = styled(motion.span)`
   padding: 0.5rem 1rem;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  border-radius: 25px;
-  color: #00d4ff;
+  background: ${tints.primaryFaint};
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
   font-size: 0.9rem;
   font-weight: 500;
 `;
@@ -98,13 +96,13 @@ const AboutImage = styled(motion.div)`
 const ImagePlaceholder = styled.div`
   width: 300px;
   height: 400px;
-  background: linear-gradient(135deg, #333, #555);
-  border-radius: 20px;
+  background: ${gradients.placeholder};
+  border-radius: ${radii.xl};
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  color: #00d4ff;
+  color: ${colors.primary};
   position: relative;
   overflow: hidden;
 
@@ -115,7 +113,7 @@ const ImagePlaceholder = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, ${tints.primaryFaint}, transparent);
     animation: shimmer 3s infinite;
   }
 
@@ -130,10 +128,10 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
-    { number: "6+", label: "Years Experience" },
+    { number: "8+", label: "Years Experience" },
     { number: "10+", label: "Applications Built" },
-    { number: "15+", label: "Technologies" },
-    { number: "1k+", label: "App Downloads" }
+    { number: "30+", label: "Technologies" },
+    { number: "6k+", label: "App Downloads" }
   ];
 
   const previewSkills = ["Flutter", "Dart", "React.js", "Next.js", "Firebase", "JavaScript"];
@@ -155,7 +153,7 @@ const About = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            As a Computer Science graduate with over six years of hands-on coding experience, I'm passionate about 
+            As a Computer Science graduate with over eight years of hands-on coding experience, I'm passionate about 
             building impactful mobile and web applications using Flutter, Dart, React.js, and Next.js. I specialize 
             in crafting scalable, user-centric solutions that blend seamless performance with intuitive interfaces.
           </AboutText>
@@ -165,9 +163,10 @@ const About = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            In my current role as Lead Flutter Developer and Senior Software Engineer, I manage mobile teams, 
-            influence key technical decisions, and represent mobile development in high-level discussions. I have a 
-            proven track record of introducing innovative features and optimizing workflows across diverse teams.
+            I hold two roles today. As CTO at Accraaa, I own technical direction and platform architecture for the 
+            nightlife and dining app I built from concept to production. As Senior Software Engineer, Mobile at Dodo 
+            Technologies, I lead the mobile team across two enterprise Flutter applications, influence key technical 
+            decisions, and represent mobile development in high-level architecture discussions.
           </AboutText>
 
           <StatsContainer>

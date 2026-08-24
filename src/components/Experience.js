@@ -4,13 +4,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaBriefcase, FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { borders, colors, gradients, gradientText, media, radii, surfaces, tints } from '../theme';
 
 const ExperienceSection = styled.section`
   padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 20px;
+  background: ${surfaces.subtle};
+  border-radius: ${radii.xl};
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
@@ -20,10 +21,7 @@ const SectionTitle = styled(motion.h2)`
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #00d4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText()}
 `;
 
 const Timeline = styled.div`
@@ -38,10 +36,10 @@ const Timeline = styled.div`
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, #00d4ff, #ff0096);
+    background: linear-gradient(to bottom, ${colors.primary}, ${colors.secondary});
     transform: translateX(-50%);
 
-    @media (max-width: 768px) {
+    ${media.tablet} {
       left: 20px;
     }
   }
@@ -57,7 +55,7 @@ const TimelineItem = styled(motion.div)`
       margin-left: 0;
       margin-right: 50%;
 
-      @media (max-width: 768px) {
+      ${media.tablet} {
         margin-right: 0;
         margin-left: 50px;
       }
@@ -66,7 +64,7 @@ const TimelineItem = styled(motion.div)`
         right: -10px;
         left: auto;
 
-        @media (max-width: 768px) {
+        ${media.tablet} {
           left: -10px;
           right: auto;
         }
@@ -79,14 +77,14 @@ const TimelineItem = styled(motion.div)`
       margin-left: 50%;
       margin-right: 0;
 
-      @media (max-width: 768px) {
+      ${media.tablet} {
         margin-left: 50px;
       }
 
       &::before {
         left: -10px;
 
-        @media (max-width: 768px) {
+        ${media.tablet} {
           left: -10px;
         }
       }
@@ -95,9 +93,9 @@ const TimelineItem = styled(motion.div)`
 `;
 
 const TimelineContent = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.lg};
   padding: 2rem;
   backdrop-filter: blur(10px);
   position: relative;
@@ -109,11 +107,11 @@ const TimelineContent = styled.div`
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-right-color: rgba(255, 255, 255, 0.1);
+    border-right-color: ${borders.subtle};
 
-    @media (max-width: 768px) {
+    ${media.tablet} {
       border-right-color: transparent;
-      border-left-color: rgba(255, 255, 255, 0.1);
+      border-left-color: ${borders.subtle};
     }
   }
 `;
@@ -125,30 +123,48 @@ const TimelineIcon = styled.div`
   transform: translateX(-50%);
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #00d4ff, #ff0096);
-  border-radius: 50%;
+  background: ${gradients.accent};
+  border-radius: ${radii.round};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000;
+  color: ${colors.onAccent};
   font-weight: bold;
   z-index: 2;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     left: 20px;
   }
+`;
+
+const TitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
 `;
 
 const JobTitle = styled.h3`
   font-size: 1.3rem;
   font-weight: 600;
-  color: #00d4ff;
-  margin-bottom: 0.5rem;
+  color: ${colors.primary};
+`;
+
+const EmploymentBadge = styled.span`
+  padding: 0.2rem 0.7rem;
+  background: ${tints.primaryFaint};
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
 `;
 
 const Company = styled.h4`
   font-size: 1.1rem;
-  color: #ffffff;
+  color: ${colors.text};
   margin-bottom: 0.5rem;
 `;
 
@@ -156,7 +172,7 @@ const Duration = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #888;
+  color: ${colors.textSubtle};
   font-size: 0.9rem;
   margin-bottom: 1rem;
 `;
@@ -165,19 +181,19 @@ const Location = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #888;
+  color: ${colors.textSubtle};
   font-size: 0.9rem;
   margin-bottom: 1rem;
 `;
 
 const Description = styled.p`
-  color: #ccc;
+  color: ${colors.textMuted};
   line-height: 1.6;
   margin-bottom: 1rem;
 `;
 
 const Achievements = styled.ul`
-  color: #ccc;
+  color: ${colors.textMuted};
   padding-left: 1.5rem;
   line-height: 1.6;
 `;
@@ -193,34 +209,56 @@ const Experience = () => {
   const experiences = [
     {
       type: 'work',
-      title: 'Software Engineer',
+      employmentType: 'Full-time',
+      title: 'Senior Software Engineer, Mobile',
       company: 'Dodo Technologies',
       duration: 'September 2023 - Present',
       location: 'Accra, Greater Accra, Ghana',
-      description: 'Spearheading the development and management of two Flutter applications: Dodo Workplace and Dodo Messenger.',
+      description: 'Leading mobile development for two enterprise Flutter applications, Workplace and Messenger, serving 1k+ concurrent users with 99.9% uptime.',
       achievements: [
-        'Architected and maintained two distinct, high-performance Flutter codebases',
-        'Successfully launched both Workplace and Messenger achieving 100+ downloads',
-        'Implemented comprehensive real-time communication features including voice/video calling',
-        'Integrated Firebase, Socket.IO, GetX, Hive, and Shorebird for enhanced functionality'
+        'Architected a Clean Architecture implementation across a 100k+ line codebase, cutting bug resolution time by 40%',
+        'Reduced release time by 93.75%, from 4 hours to 15 minutes, through Makefile automation, GitHub Actions, code signing, and App Store Connect API integration',
+        'Achieved a 99.9% crash-free rate across 1k+ active users using Sentry and Firebase Crashlytics',
+        'Built Socket.IO messaging infrastructure handling 1k+ daily messages at a 99.9% delivery success rate, with an offline-first message queue that syncs everything once connectivity returns',
+        'Optimised performance to sub-100ms API response times and a 45% faster launch, from 3.2s to 1.76s',
+        'Lead the mobile team and established a code review culture that improved code quality metrics by 60%'
       ]
     },
     {
       type: 'work',
+      employmentType: 'Founding Engineer',
+      title: 'Founding Engineer → CTO',
+      company: 'Accraaa',
+      duration: 'October 2025 - Present',
+      location: 'United States (Remote)',
+      description: 'Led Accraaa from concept to production as the sole Flutter engineer, and now own technical direction, platform architecture, and engineering priorities as CTO.',
+      achievements: [
+        'Shipped a cross-platform iOS and Android app in Flutter and Riverpod, backed by Supabase, Firebase Cloud Messaging, Google Maps, Paystack, Sentry, and Shorebird over-the-air updates',
+        'Built the companion Next.js 15 web platform on Vercel and Supabase, spanning public booking, a venue-owner dashboard, and an internal admin suite',
+        'Grew to a ~5K installed audience on Google Play and ~2K monthly active users',
+        'Maintained a 0.00% crash rate on the latest Android release and zero reported iOS crashes',
+        'Established engineering practices for multi-flavor releases, CI/CD, and monitoring while aligning the technical roadmap with business goals'
+      ]
+    },
+    {
+      type: 'work',
+      employmentType: 'Contract',
       title: 'Software Engineer',
       company: 'eHealth Technologies',
       duration: 'July 2023 - August 2025',
       location: 'Accra, Greater Accra, Ghana',
-      description: 'Spearheaded the client-side development and launch of "MyHealth," a holistic Flutter-based health management application.',
+      description: 'Spearheaded the development and launch of MyHealth, a comprehensive Flutter-based health management application that reached 1k+ downloads across both app stores.',
       achievements: [
-        'Architected and implemented entire Flutter codebase for health management app',
-        'Delivered comprehensive features including health records, symptom tracking, and video consultations',
-        'Achieved over 1,000+ combined downloads across iOS and Android platforms',
-        'Successfully integrated Agora RTC, Firebase, and Socket.IO for real-time functionality'
+        'Architected the entire Flutter codebase from the ground up, delivering 8+ major features including health records, symptom tracking, medication reminders, appointment scheduling, and secure messaging',
+        'Integrated Agora for telemedicine video consultations with HD quality and low latency',
+        'Established an offline-first architecture with Hive and Sembast enabling full functionality without connectivity, critical for healthcare access in low-connectivity areas',
+        'Implemented Shorebird for zero-downtime hotfixes, replacing 2-3 day store approval waits with instant deployment',
+        'Achieved a 99.5% crash-free rate through comprehensive error handling and proactive monitoring'
       ]
     },
     {
       type: 'work',
+      employmentType: 'Contract',
       title: 'Flutter Developer',
       company: 'Cast Social',
       duration: 'January 2023 - August 2025',
@@ -235,7 +273,8 @@ const Experience = () => {
     },
     {
       type: 'work',
-      title: 'Software Engineer',
+      employmentType: 'Full-time',
+      title: 'Flutter Developer',
       company: 'Ministry of Finance Ghana',
       duration: 'October 2021 - May 2023',
       location: 'Accra, Greater Accra, Ghana',
@@ -249,6 +288,7 @@ const Experience = () => {
     },
     {
       type: 'work',
+      employmentType: 'Internship',
       title: 'Web and App Developer Intern',
       company: 'HYPACART LTD',
       duration: 'August 2020 - November 2020',
@@ -300,7 +340,12 @@ const Experience = () => {
             </TimelineIcon>
             
             <TimelineContent className="content">
-              <JobTitle>{exp.title}</JobTitle>
+              <TitleRow>
+                <JobTitle>{exp.title}</JobTitle>
+                {exp.employmentType && (
+                  <EmploymentBadge>{exp.employmentType}</EmploymentBadge>
+                )}
+              </TitleRow>
               <Company>{exp.company}</Company>
               
               <Duration>

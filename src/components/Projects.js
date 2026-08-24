@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
 
 const ProjectsSection = styled.section`
   padding: 5rem 2rem;
@@ -16,10 +17,7 @@ const SectionTitle = styled(motion.h2)`
   font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, #ffffff, #00d4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  ${gradientText()}
 `;
 
 const ProjectsGrid = styled.div`
@@ -27,7 +25,7 @@ const ProjectsGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     grid-template-columns: 1fr;
     gap: 2rem;
     justify-items: center;
@@ -36,20 +34,20 @@ const ProjectsGrid = styled.div`
 `;
 
 const ProjectCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.lg};
   overflow: hidden;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-10px);
-    border-color: rgba(0, 212, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+    border-color: ${borders.primary};
+    box-shadow: ${shadows.accentLift};
   }
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     width: 100%;
     max-width: 400px;
   }
@@ -57,12 +55,12 @@ const ProjectCard = styled(motion.div)`
 
 const ProjectImage = styled.div`
   height: 200px;
-  background: linear-gradient(135deg, #333, #555);
+  background: ${gradients.placeholder};
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
-  color: #00d4ff;
+  color: ${colors.primary};
   position: relative;
   overflow: hidden;
 
@@ -73,7 +71,7 @@ const ProjectImage = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, ${tints.primaryFaint}, transparent);
     animation: shimmer 3s infinite;
   }
 
@@ -87,7 +85,7 @@ const ProjectContent = styled.div`
   padding: 1.5rem;
   overflow: hidden;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     padding: 1.2rem;
   }
 `;
@@ -95,12 +93,12 @@ const ProjectContent = styled.div`
 const ProjectTitle = styled.h3`
   font-size: 1.3rem;
   font-weight: 600;
-  color: #ffffff;
+  color: ${colors.text};
   margin-bottom: 0.5rem;
 `;
 
 const ProjectDescription = styled.p`
-  color: #ccc;
+  color: ${colors.textMuted};
   line-height: 1.6;
   margin-bottom: 1rem;
 `;
@@ -114,10 +112,10 @@ const TechStack = styled.div`
 
 const TechTag = styled.span`
   padding: 0.3rem 0.8rem;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  border-radius: 15px;
-  color: #00d4ff;
+  background: ${tints.primaryFaint};
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.lg};
+  color: ${colors.primary};
   font-size: 0.8rem;
   font-weight: 500;
 `;
@@ -127,7 +125,7 @@ const ProjectLinks = styled.div`
   gap: 1rem;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     gap: 0.8rem;
     justify-content: center;
   }
@@ -138,10 +136,10 @@ const ProjectLink = styled(motion.a)`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  border-radius: 25px;
-  color: #00d4ff;
+  background: ${tints.primaryFaint};
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -150,11 +148,11 @@ const ProjectLink = styled(motion.a)`
   flex-shrink: 0;
 
   &:hover {
-    background: rgba(0, 212, 255, 0.2);
+    background: ${tints.primarySoft};
     transform: translateY(-2px);
   }
 
-  @media (max-width: 768px) {
+  ${media.tablet} {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
     gap: 0.4rem;
@@ -166,6 +164,24 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const projects = [
+    {
+      title: "Accraaa - Nightlife & Dining Discovery",
+      description: "Ghana's nightlife discovery app for iOS and Android. Find trending venues with real-time crowd levels, reserve tables, split bills with friends over Paystack, share live location, and earn loyalty rewards. Built from concept to production as founding engineer.",
+      tech: ["Flutter", "Dart", "Riverpod", "Supabase", "Paystack", "Google Maps", "Sentry", "Shorebird"],
+      github: "#",
+      demo: "https://play.google.com/store/apps/details?id=com.company.accraaa",
+      iosDemo: "https://apps.apple.com/us/app/accraaa/id6754570414",
+      icon: "🌃"
+    },
+    {
+      title: "Accraaa Web Platform",
+      description: "The full-stack platform behind Accraaa: public venue discovery and booking, a venue-owner dashboard with interactive floor plans, analytics and CRM, and an internal admin suite. Spans 100+ pages and 270+ API routes with dual Stripe and Paystack payments.",
+      tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Stripe", "Paystack"],
+      github: "#",
+      demo: "https://accraaa.com",
+      webOnly: true,
+      icon: "🖥️"
+    },
     {
       title: "Dodo Workplace",
       description: "Internal employee collaboration hub built with Flutter featuring real-time communication, task management, and workplace productivity tools.",

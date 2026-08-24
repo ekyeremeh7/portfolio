@@ -10,10 +10,11 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ToastProvider from './components/Toast';
+import { gradients, tints } from './theme';
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background: ${gradients.page};
   position: relative;
   
   &::before {
@@ -23,8 +24,8 @@ const AppContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 150, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 80%, ${tints.primaryFaint} 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, ${tints.secondaryFaint} 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
   }
