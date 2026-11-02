@@ -35,7 +35,7 @@ const FooterLogo = styled(motion.div)`
   margin-bottom: 1rem;
 `;
 
-const FooterDescription = styled.p`
+const FooterDescription = styled(motion.p)`
   color: ${colors.textMuted};
   margin-bottom: 2rem;
   max-width: 600px;
@@ -110,6 +110,7 @@ const Footer = () => {
     { href: '#about', text: 'About' },
     { href: '#skills', text: 'Skills' },
     { href: '#projects', text: 'Projects' },
+    { href: '#process', text: 'Process' },
     { href: '#experience', text: 'Experience' },
     { href: '#contact', text: 'Contact' }
   ];
@@ -145,7 +146,7 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          CTO at Accraaa and Senior Software Engineer, Mobile at Dodo Technologies, specializing in Flutter & React. Let's build cutting-edge mobile and web applications together!
+          CTO at Accraaa · Senior Engineer, Mobile at Dodo Technologies. Eight years building Flutter and React applications that ship.
         </FooterDescription>
 
         <SocialLinks>

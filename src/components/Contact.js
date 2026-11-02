@@ -14,6 +14,23 @@ const ContactSection = styled.section`
   margin: 0 auto;
 `;
 
+const SectionLabelRow = styled(motion.div)`
+  text-align: center;
+  margin-bottom: 1.25rem;
+`;
+
+const SectionTag = styled.span`
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
 const SectionTitle = styled(motion.h2)`
   font-size: 2.5rem;
   font-weight: 700;
@@ -120,7 +137,7 @@ const SocialLink = styled(motion.a)`
   }
 `;
 
-const ContactForm = styled.form`
+const ContactForm = styled(motion.form)`
   background: ${surfaces.card};
   border: 1px solid ${borders.subtle};
   border-radius: ${radii.lg};
@@ -208,6 +225,25 @@ const SubmitButton = styled(motion.button)`
   }
 `;
 
+const DirectCTA = styled(motion.div)`
+  text-align: center;
+  margin-top: 3rem;
+  color: ${colors.textSubtle};
+  font-size: 0.95rem;
+
+  a {
+    color: ${colors.primary};
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid ${borders.primarySubtle};
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      border-color: ${colors.primary};
+    }
+  }
+`;
+
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -290,10 +326,18 @@ const Contact = () => {
 
   return (
     <ContactSection id="contact" ref={ref}>
+      <SectionLabelRow
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+      >
+        <SectionTag>Contact</SectionTag>
+      </SectionLabelRow>
+
       <SectionTitle
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         Get In Touch
       </SectionTitle>
@@ -302,8 +346,8 @@ const Contact = () => {
         <ContactInfo>
           <ContactTitle>Let's Connect</ContactTitle>
           <ContactDescription>
-            I'm always interested in new opportunities and exciting projects. As a passionate Software Engineer 
-            with expertise in Flutter and React development, I'm ready to help bring your ideas to life!
+            If you're building something mobile-first or need a senior Flutter engineer, reach out.
+            I'm selective about what I take on — which means I'm thorough about what I commit to.
           </ContactDescription>
 
           {contactInfo.map((item, index) => (
@@ -420,6 +464,14 @@ const Contact = () => {
           </SubmitButton>
         </ContactForm>
       </ContactContainer>
+
+      <DirectCTA
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        Prefer a direct line? <a href="mailto:ekyeremeh7@gmail.com">ekyeremeh7@gmail.com</a>
+      </DirectCTA>
     </ContactSection>
   );
 };

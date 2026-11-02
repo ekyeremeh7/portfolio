@@ -1,8 +1,8 @@
 export const colors = {
   background: '#0a0a0a',
   backgroundAlt: '#1a1a1a',
-  primary: '#00d4ff',
-  secondary: '#ff0096',
+  primary: '#34d399',
+  secondary: '#818cf8',
   onAccent: '#000',
   text: '#ffffff',
   textMuted: '#ccc',
@@ -24,26 +24,26 @@ export const borders = {
   subtle: 'rgba(255, 255, 255, 0.1)',
   medium: 'rgba(255, 255, 255, 0.12)',
   strong: 'rgba(255, 255, 255, 0.2)',
-  primarySubtle: 'rgba(0, 212, 255, 0.2)',
-  primary: 'rgba(0, 212, 255, 0.3)',
+  primarySubtle: 'rgba(52, 211, 153, 0.2)',
+  primary: 'rgba(52, 211, 153, 0.3)',
 };
 
 export const tints = {
-  primaryFaint: 'rgba(0, 212, 255, 0.1)',
-  primarySoft: 'rgba(0, 212, 255, 0.2)',
-  secondaryFaint: 'rgba(255, 0, 150, 0.1)',
+  primaryFaint: 'rgba(52, 211, 153, 0.1)',
+  primarySoft: 'rgba(52, 211, 153, 0.2)',
+  secondaryFaint: 'rgba(129, 140, 248, 0.1)',
 };
 
 export const gradients = {
-  accent: 'linear-gradient(135deg, #00d4ff, #ff0096)',
-  heading: 'linear-gradient(135deg, #ffffff, #00d4ff)',
+  accent: 'linear-gradient(135deg, #34d399, #818cf8)',
+  heading: 'linear-gradient(135deg, #ffffff, #34d399)',
   page: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
   placeholder: 'linear-gradient(135deg, #333, #555)',
 };
 
 export const shadows = {
-  accentSoft: '0 10px 20px rgba(0, 212, 255, 0.3)',
-  accentLift: '0 20px 40px rgba(0, 212, 255, 0.1)',
+  accentSoft: '0 10px 20px rgba(52, 211, 153, 0.3)',
+  accentLift: '0 20px 40px rgba(52, 211, 153, 0.1)',
 };
 
 export const radii = {

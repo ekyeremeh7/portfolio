@@ -16,6 +16,23 @@ const ExperienceSection = styled.section`
   margin-bottom: 2rem;
 `;
 
+const SectionLabel = styled(motion.div)`
+  text-align: center;
+  margin-bottom: 1.25rem;
+`;
+
+const Label = styled.span`
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
 const SectionTitle = styled(motion.h2)`
   font-size: 2.5rem;
   font-weight: 700;
@@ -307,22 +324,25 @@ const Experience = () => {
       company: 'Kwame Nkrumah University of Science and Technology',
       duration: '2017 - 2022',
       location: 'Kumasi, Ghana',
-      description: 'Computer Science degree focusing on software engineering, algorithms, and mobile/web development.',
-      achievements: [
-        'Completed comprehensive Computer Science curriculum',
-        'Gained strong foundation in programming and software development',
-        'Developed problem-solving skills and technical expertise',
-        'Prepared for professional software development career'
-      ]
+      description: 'Computer Science degree covering software engineering, algorithms, data structures, and systems design. Started building mobile apps during my second year — that\'s where the Flutter focus began.',
+      achievements: []
     }
   ];
 
   return (
     <ExperienceSection id="experience" ref={ref}>
+      <SectionLabel
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Label>Background</Label>
+      </SectionLabel>
+
       <SectionTitle
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         Experience & Education
       </SectionTitle>
@@ -360,11 +380,13 @@ const Experience = () => {
               
               <Description>{exp.description}</Description>
               
-              <Achievements>
-                {exp.achievements.map((achievement, achIndex) => (
-                  <Achievement key={achIndex}>{achievement}</Achievement>
-                ))}
-              </Achievements>
+              {exp.achievements.length > 0 && (
+                <Achievements>
+                  {exp.achievements.map((achievement, achIndex) => (
+                    <Achievement key={achIndex}>{achievement}</Achievement>
+                  ))}
+                </Achievements>
+              )}
             </TimelineContent>
           </TimelineItem>
         ))}

@@ -13,6 +13,23 @@ const AboutSection = styled.section`
   position: relative;
 `;
 
+const SectionLabel = styled(motion.div)`
+  text-align: center;
+  margin-bottom: 1.25rem;
+`;
+
+const Label = styled.span`
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
 const SectionTitle = styled(motion.h2)`
   font-size: 2.5rem;
   font-weight: 700;
@@ -131,17 +148,25 @@ const About = () => {
     { number: "8+", label: "Years Experience" },
     { number: "10+", label: "Applications Built" },
     { number: "30+", label: "Technologies" },
-    { number: "6k+", label: "App Downloads" }
+    { number: "5k+", label: "App Downloads" }
   ];
 
   const previewSkills = ["Flutter", "Dart", "React.js", "Next.js", "Firebase", "JavaScript"];
 
   return (
     <AboutSection id="about" ref={ref}>
+      <SectionLabel
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Label>About</Label>
+      </SectionLabel>
+
       <SectionTitle
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         About Me
       </SectionTitle>
@@ -153,9 +178,8 @@ const About = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            As a Computer Science graduate with over eight years of hands-on coding experience, I'm passionate about 
-            building impactful mobile and web applications using Flutter, Dart, React.js, and Next.js. I specialize 
-            in crafting scalable, user-centric solutions that blend seamless performance with intuitive interfaces.
+            Computer Science graduate from KNUST with eight years of production engineering. I build mobile and web
+            applications that ship — clean architecture, real CI/CD, outcomes I can put numbers on.
           </AboutText>
 
           <AboutText
@@ -163,10 +187,10 @@ const About = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            I hold two roles today. As CTO at Accraaa, I own technical direction and platform architecture for the 
-            nightlife and dining app I built from concept to production. As Senior Software Engineer, Mobile at Dodo 
-            Technologies, I lead the mobile team across two enterprise Flutter applications, influence key technical 
-            decisions, and represent mobile development in high-level architecture discussions.
+            I wear two hats. As CTO at Accraaa, I own technical direction and platform architecture for the
+            nightlife discovery app I built from concept to production. As Senior Software Engineer at Dodo
+            Technologies, I lead mobile across two enterprise Flutter apps and drive the architecture decisions
+            that keep them running at 99.9% uptime.
           </AboutText>
 
           <StatsContainer>
@@ -204,16 +228,16 @@ const About = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <img 
-              src={profilePicture} 
-              alt="Emmanuel Kwabena Kyeremeh" 
+            <img
+              src={profilePicture}
+              alt="Emmanuel Kwabena Kyeremeh"
               loading="lazy"
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center -10%',
-                borderRadius: '50%'
+                objectPosition: 'center top',
+                borderRadius: '15px'
               }}
             />
           </ImagePlaceholder>

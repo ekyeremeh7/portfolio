@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
-import { colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
+import profilePicture from '../assets/profile-picture.jpg';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -10,14 +11,14 @@ const HeroSection = styled.section`
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0 2rem;
+  padding: 70px 2rem 0;
   overflow: hidden;
 
   ${media.tablet} {
     padding: 2rem 1rem;
     min-height: auto;
     align-items: flex-start;
-    padding-top: 4rem;
+    padding-top: 5rem;
   }
 `;
 
@@ -86,6 +87,10 @@ const Description = styled(motion.p)`
   margin-bottom: 2rem;
   line-height: 1.6;
   max-width: 500px;
+
+  ${media.tablet} {
+    max-width: 100%;
+  }
 `;
 
 const ButtonGroup = styled(motion.div)`
@@ -113,7 +118,7 @@ const Button = styled(motion.a)`
   &.primary {
     background: ${gradients.accent};
     color: ${colors.onAccent};
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: ${shadows.accentSoft};
@@ -124,7 +129,7 @@ const Button = styled(motion.a)`
     background: transparent;
     color: ${colors.primary};
     border-color: ${colors.primary};
-    
+
     &:hover {
       background: ${colors.primary};
       color: ${colors.onAccent};
@@ -136,6 +141,10 @@ const Button = styled(motion.a)`
 const SocialLinks = styled(motion.div)`
   display: flex;
   gap: 1rem;
+
+  ${media.tablet} {
+    justify-content: center;
+  }
 `;
 
 const SocialLink = styled(motion.a)`
@@ -158,11 +167,56 @@ const SocialLink = styled(motion.a)`
   }
 `;
 
+const pulse = keyframes`
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+`;
+
+const MetricsRow = styled(motion.div)`
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+
+  ${media.tablet} {
+    justify-content: center;
+  }
+`;
+
+const MetricPill = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.pill};
+  backdrop-filter: blur(10px);
+`;
+
+const MetricDot = styled.span`
+  width: 6px;
+  height: 6px;
+  border-radius: ${radii.round};
+  background: ${colors.primary};
+  flex-shrink: 0;
+  animation: ${pulse} 2s ease-in-out infinite;
+`;
+
+const MetricText = styled.span`
+  font-size: 0.8rem;
+  color: ${colors.textMuted};
+
+  strong {
+    color: ${colors.primary};
+    font-weight: 600;
+  }
+`;
+
 const HeroImage = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 `;
 
 const ImageContainer = styled.div`
@@ -186,82 +240,21 @@ const ImageContainer = styled.div`
     height: 100%;
     border-radius: ${radii.round};
     object-fit: cover;
+    object-position: center top;
     position: relative;
     z-index: 2;
   }
 `;
 
-const FloatingElements = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 1;
-`;
-
-const FloatingElement = styled(motion.div)`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: ${gradients.accent};
-  border-radius: ${radii.round};
-  opacity: 0.6;
-
-  &:nth-child(1) {
-    top: 20%;
-    left: 10%;
-  }
-  &:nth-child(2) {
-    top: 60%;
-    right: 10%;
-  }
-  &:nth-child(3) {
-    bottom: 20%;
-    left: 20%;
-  }
-`;
-
 const Hero = () => {
-  const [currentText, setCurrentText] = useState('');
-  const fullText = "CTO at Accraaa | Senior Software Engineer, Mobile";
-
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setCurrentText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 100);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // Function to handle resume download
   const handleResumeDownload = (e) => {
     e.preventDefault();
-
-    // Path to your resume in the public folder
-    const resumeUrl = '/Emmanuel_Kwabena_Kyeremeh.pdf';
-
-    // Create a temporary anchor element
     const link = document.createElement('a');
-    link.href = resumeUrl;
+    link.href = '/Emmanuel_Kwabena_Kyeremeh.pdf';
     link.download = 'Emmanuel_Kwabena_Kyeremeh.pdf';
     document.body.appendChild(link);
-
-    // Trigger the download
     link.click();
-
-    // Clean up
     document.body.removeChild(link);
-
-    // Fallback: open in new tab if download doesn't work
-    window.open(resumeUrl, '_blank');
   };
 
   return (
@@ -289,7 +282,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {currentText}<span style={{ color: colors.primary }}>|</span>
+            CTO at Accraaa · Senior Engineer, Mobile
           </Title>
 
           <Description
@@ -297,9 +290,9 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            I architect and ship production mobile applications for Android and iOS with Flutter, and build for the
-            web with React and Next.js. Over 8 years of hands-on coding experience, currently leading mobile at
-            Dodo Technologies and technical direction at Accraaa.
+            I built Accraaa from a blank Flutter project to 5K installs — then became CTO.
+            At Dodo I cut the release cycle from 4 hours to 15 minutes.
+            Eight years in, mobile is where I do my best work.
           </Description>
 
           <ButtonGroup
@@ -326,10 +319,30 @@ const Hero = () => {
             </Button>
           </ButtonGroup>
 
-          <SocialLinks
+          <MetricsRow
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
+          >
+            {[
+              { value: '0.00%', label: 'Crash Rate' },
+              { value: '99.9%', label: 'Uptime' },
+              { value: '4h → 15min', label: 'Release Cycle' },
+              { value: '5K+', label: 'Installs' },
+            ].map((m) => (
+              <MetricPill key={m.label}>
+                <MetricDot />
+                <MetricText>
+                  <strong>{m.value}</strong> {m.label}
+                </MetricText>
+              </MetricPill>
+            ))}
+          </MetricsRow>
+
+          <SocialLinks
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
           >
             <SocialLink
               href="https://github.com/ekyeremeh7"
@@ -374,35 +387,8 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <ImageContainer>
-            <div style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: radii.round,
-              background: gradients.placeholder,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '4rem',
-              color: colors.primary
-            }}>
-              EK
-            </div>
+            <img src={profilePicture} alt="Emmanuel Kwabena Kyeremeh" />
           </ImageContainer>
-
-          <FloatingElements>
-            <FloatingElement
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-            <FloatingElement
-              animate={{ y: [10, -10, 10] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
-            <FloatingElement
-              animate={{ y: [-5, 15, -5] }}
-              transition={{ duration: 5, repeat: Infinity }}
-            />
-          </FloatingElements>
         </HeroImage>
       </HeroContainer>
     </HeroSection>

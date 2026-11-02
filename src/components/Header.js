@@ -168,6 +168,9 @@ const Header = () => {
             <a href="#projects" onClick={() => scrollToSection('projects')}>Projects</a>
           </NavLink>
           <NavLink>
+            <a href="#process" onClick={() => scrollToSection('process')}>Process</a>
+          </NavLink>
+          <NavLink>
             <a href="#experience" onClick={() => scrollToSection('experience')}>Experience</a>
           </NavLink>
           <NavLink>
