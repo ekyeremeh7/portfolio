@@ -45,13 +45,13 @@ html {
 
 /* Selection */
 ::selection {
-  background: #34d399;
+  background: #2dd4bf;
   color: #000;
 }
 
 /* Focus styles */
 *:focus {
-  outline: 2px solid #34d399;
+  outline: 2px solid #2dd4bf;
   outline-offset: 2px;
 }
 
