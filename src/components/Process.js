@@ -133,7 +133,11 @@ const Divider = styled.div`
 
 const PipelineWrap = styled(motion.div)`
   max-width: 720px;
-  margin: 0 auto 1rem;
+  margin: 4rem auto 1rem;
+
+  ${media.tablet} {
+    margin-top: 3rem;
+  }
 `;
 
 const Terminal = styled.div`
