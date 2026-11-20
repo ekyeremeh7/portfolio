@@ -18,6 +18,8 @@ import {
   FaLayerGroup,
   FaRocket,
   FaBug,
+  FaMicrosoft,
+  FaChartBar,
 } from 'react-icons/fa';
 import { borders, colors, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
 
@@ -206,6 +208,8 @@ const groups = [
       { name: 'Fastlane', icon: <FaRocket /> },
       { name: 'Shorebird', icon: <FaRocket /> },
       { name: 'Sentry', icon: <FaBug /> },
+      { name: 'Microsoft Clarity', icon: <FaMicrosoft /> },
+      { name: 'PostHog', icon: <FaChartBar /> },
     ],
   },
   {
