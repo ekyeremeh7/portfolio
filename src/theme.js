@@ -1,7 +1,7 @@
 export const colors = {
   background: '#faf8f5',
   backgroundAlt: '#f1ede6',
-  primary: '#059669',
+  primary: '#0d9488',
   secondary: '#d97706',
   onAccent: '#ffffff',
   text: '#1a1a1a',
@@ -24,25 +24,25 @@ export const borders = {
   subtle: 'rgba(26, 26, 26, 0.1)',
   medium: 'rgba(26, 26, 26, 0.12)',
   strong: 'rgba(26, 26, 26, 0.2)',
-  primarySubtle: 'rgba(5, 150, 105, 0.2)',
-  primary: 'rgba(5, 150, 105, 0.3)',
+  primarySubtle: 'rgba(13, 148, 136, 0.2)',
+  primary: 'rgba(13, 148, 136, 0.3)',
 };
 
 export const tints = {
-  primaryFaint: 'rgba(5, 150, 105, 0.08)',
-  primarySoft: 'rgba(5, 150, 105, 0.16)',
+  primaryFaint: 'rgba(13, 148, 136, 0.08)',
+  primarySoft: 'rgba(13, 148, 136, 0.16)',
   secondaryFaint: 'rgba(217, 119, 6, 0.1)',
 };
 
 export const gradients = {
-  accent: 'linear-gradient(135deg, #059669, #047857)',
-  heading: 'linear-gradient(135deg, #1a1a1a, #059669)',
+  accent: 'linear-gradient(135deg, #0d9488, #0f766e)',
+  heading: 'linear-gradient(135deg, #1a1a1a, #0d9488)',
   page: 'linear-gradient(135deg, #faf8f5 0%, #f1ede6 100%)',
   placeholder: 'linear-gradient(135deg, #e5e0d8, #d6d0c4)',
 };
 
 export const shadows = {
-  accentSoft: '0 10px 20px rgba(5, 150, 105, 0.2)',
+  accentSoft: '0 10px 20px rgba(13, 148, 136, 0.2)',
   accentLift: '0 20px 40px rgba(26, 26, 26, 0.08)',
 };
 
