@@ -40,6 +40,108 @@ const SectionTitle = styled(motion.h2)`
   ${gradientText()}
 `;
 
+const FeaturedCard = styled(motion.article)`
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  background: ${surfaces.card};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.xl};
+  overflow: hidden;
+  margin-bottom: 2rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: ${borders.primary};
+    box-shadow: ${shadows.accentLift};
+  }
+
+  ${media.tablet} {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FeaturedMedia = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  background: radial-gradient(circle at 50% 40%, ${tints.primarySoft}, transparent 70%), ${surfaces.raised};
+  border-right: 1px solid ${borders.subtle};
+
+  ${media.tablet} {
+    min-height: 220px;
+    border-right: none;
+    border-bottom: 1px solid ${borders.subtle};
+  }
+`;
+
+const FeaturedLogo = styled.img`
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 36px;
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.5));
+`;
+
+const FeaturedBody = styled.div`
+  padding: 2.5rem;
+
+  ${media.tablet} {
+    padding: 1.5rem;
+  }
+`;
+
+const FeaturedTag = styled.span`
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid ${borders.primary};
+  border-radius: ${radii.pill};
+  color: ${colors.primary};
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+`;
+
+const StatRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+
+  ${media.mobile} {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const StatBox = styled.div`
+  padding: 0.9rem 1rem;
+  background: ${surfaces.subtle};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.md};
+`;
+
+const StatValue = styled.div`
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  ${gradientText()}
+`;
+
+const StatLabel = styled.div`
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: ${colors.textSubtle};
+`;
+
+const featuredStats = [
+  { value: '5K+', label: 'Android installs' },
+  { value: '0.00%', label: 'crash rate, latest Android' },
+  { value: '~2K', label: 'monthly active users' },
+];
+
 const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -187,48 +289,88 @@ const ProjectLink = styled(motion.a)`
   }
 `;
 
+const projects = [
+  {
+    title: "Accraaa — Nightlife & Dining App",
+    description: "Built it solo from a blank Flutter project to 5K installs on Google Play. Real-time crowd levels, table reservations, Paystack split billing, live location sharing, and loyalty rewards. 0.00% crash rate on the latest Android release, zero reported iOS crashes.",
+    tech: ["Flutter", "Dart", "Riverpod", "Supabase", "Paystack", "Google Maps", "Sentry", "Shorebird"],
+    github: "#",
+    demo: "https://play.google.com/store/apps/details?id=com.company.accraaa",
+    iosDemo: "https://apps.apple.com/us/app/accraaa/id6754570414",
+    logo: accraaaLogo,
+  },
+  {
+    title: "Accraaa Web Platform",
+    description: "The full-stack platform behind Accraaa. Public venue booking, a venue-owner dashboard with interactive floor plans and analytics, and an internal admin suite. 100+ pages, 270+ API routes, dual Stripe and Paystack payment processing.",
+    tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Stripe", "Paystack"],
+    github: "#",
+    demo: "https://accraaa.com",
+    webOnly: true,
+    logo: accraaaLogo,
+  },
+  {
+    title: "Dodo Workplace",
+    description: "Enterprise collaboration app for 1K+ concurrent users. I lead the mobile team across a 100K+ line codebase, cut release time 93.75% (4 hours → 15 minutes) through CI/CD automation, and reduced launch time from 3.2s to 1.76s. 99.9% uptime.",
+    tech: ["Flutter", "Dart", "Firebase", "Socket.IO", "GetX", "Hive", "GitHub Actions", "Sentry"],
+    github: "#",
+    demo: "https://play.google.com/store/apps/details?id=com.company.dodo",
+    iosDemo: "https://apps.apple.com/us/app/dodo-workplace/id6517353759",
+    logo: dodoWorkplaceLogo,
+  },
+  {
+    title: "Dodo Messenger",
+    description: "External stakeholder communication platform for Dodo Technologies. Real-time messaging and file sharing over Socket.IO, with an offline-first message queue that syncs on reconnect. Handles 1K+ daily messages at a 99.9% delivery success rate.",
+    tech: ["Flutter", "Dart", "Firebase", "Socket.IO", "GetX", "Hive"],
+    github: "#",
+    demo: "https://play.google.com/store/apps/details?id=com.company.dodoMessenger",
+    iosDemo: "https://apps.apple.com/us/app/dodo-messenger/id6738318360",
+    logo: dodoMessengerLogo,
+  },
+];
+
+const renderLinks = (project) => (
+  <ProjectLinks>
+    {project.github && project.github !== "#" && (
+      <ProjectLink
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <FaGithub /> Code
+      </ProjectLink>
+    )}
+    {project.demo && (
+      <ProjectLink
+        href={project.demo}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <FaExternalLinkAlt /> {project.webOnly ? 'Live Demo' : 'Android'}
+      </ProjectLink>
+    )}
+    {project.iosDemo && (
+      <ProjectLink
+        href={project.iosDemo}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <FaExternalLinkAlt /> iOS
+      </ProjectLink>
+    )}
+  </ProjectLinks>
+);
+
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const projects = [
-    {
-      title: "Accraaa — Nightlife & Dining App",
-      description: "Built it solo from a blank Flutter project to 5K installs on Google Play. Real-time crowd levels, table reservations, Paystack split billing, live location sharing, and loyalty rewards. 0.00% crash rate on the latest Android release, zero reported iOS crashes.",
-      tech: ["Flutter", "Dart", "Riverpod", "Supabase", "Paystack", "Google Maps", "Sentry", "Shorebird"],
-      github: "#",
-      demo: "https://play.google.com/store/apps/details?id=com.company.accraaa",
-      iosDemo: "https://apps.apple.com/us/app/accraaa/id6754570414",
-      logo: accraaaLogo,
-    },
-    {
-      title: "Accraaa Web Platform",
-      description: "The full-stack platform behind Accraaa. Public venue booking, a venue-owner dashboard with interactive floor plans and analytics, and an internal admin suite. 100+ pages, 270+ API routes, dual Stripe and Paystack payment processing.",
-      tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Stripe", "Paystack"],
-      github: "#",
-      demo: "https://accraaa.com",
-      webOnly: true,
-      logo: accraaaLogo,
-    },
-    {
-      title: "Dodo Workplace",
-      description: "Enterprise collaboration app for 1K+ concurrent users. I lead the mobile team across a 100K+ line codebase, cut release time 93.75% (4 hours → 15 minutes) through CI/CD automation, and reduced launch time from 3.2s to 1.76s. 99.9% uptime.",
-      tech: ["Flutter", "Dart", "Firebase", "Socket.IO", "GetX", "Hive", "GitHub Actions", "Sentry"],
-      github: "#",
-      demo: "https://play.google.com/store/apps/details?id=com.company.dodo",
-      iosDemo: "https://apps.apple.com/us/app/dodo-workplace/id6517353759",
-      logo: dodoWorkplaceLogo,
-    },
-    {
-      title: "Dodo Messenger",
-      description: "External stakeholder communication platform for Dodo Technologies. Real-time messaging and file sharing over Socket.IO, with an offline-first message queue that syncs on reconnect. Handles 1K+ daily messages at a 99.9% delivery success rate.",
-      tech: ["Flutter", "Dart", "Firebase", "Socket.IO", "GetX", "Hive"],
-      github: "#",
-      demo: "https://play.google.com/store/apps/details?id=com.company.dodoMessenger",
-      iosDemo: "https://apps.apple.com/us/app/dodo-messenger/id6738318360",
-      logo: dodoMessengerLogo,
-    },
-  ];
+  const [featured, ...others] = projects;
 
   return (
     <ProjectsSection id="projects" ref={ref}>
@@ -248,13 +390,50 @@ const Projects = () => {
         Featured Projects
       </SectionTitle>
 
+      <FeaturedCard
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <FeaturedMedia>
+          <FeaturedLogo
+            src={featured.logo}
+            alt={`${featured.title} logo`}
+            loading="lazy"
+          />
+        </FeaturedMedia>
+
+        <FeaturedBody>
+          <FeaturedTag>Featured · Launched</FeaturedTag>
+          <ProjectTitle>{featured.title}</ProjectTitle>
+          <ProjectDescription>{featured.description}</ProjectDescription>
+
+          <StatRow>
+            {featuredStats.map((stat) => (
+              <StatBox key={stat.label}>
+                <StatValue>{stat.value}</StatValue>
+                <StatLabel>{stat.label}</StatLabel>
+              </StatBox>
+            ))}
+          </StatRow>
+
+          <TechStack>
+            {featured.tech.map((tech) => (
+              <TechTag key={tech}>{tech}</TechTag>
+            ))}
+          </TechStack>
+
+          {renderLinks(featured)}
+        </FeaturedBody>
+      </FeaturedCard>
+
       <ProjectsGrid>
-        {projects.map((project, index) => (
+        {others.map((project, index) => (
           <ProjectCard
-            key={index}
+            key={project.title}
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
             whileHover={{ scale: 1.02 }}
           >
             <ProjectImage>
@@ -264,52 +443,18 @@ const Projects = () => {
                 loading="lazy"
               />
             </ProjectImage>
-            
+
             <ProjectContent>
               <ProjectTitle>{project.title}</ProjectTitle>
               <ProjectDescription>{project.description}</ProjectDescription>
-              
+
               <TechStack>
-                {project.tech.map((tech, techIndex) => (
-                  <TechTag key={techIndex}>{tech}</TechTag>
+                {project.tech.map((tech) => (
+                  <TechTag key={tech}>{tech}</TechTag>
                 ))}
               </TechStack>
-              
-              <ProjectLinks>
-                {project.github && project.github !== "#" && (
-                  <ProjectLink
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FaGithub /> Code
-                  </ProjectLink>
-                )}
-                {project.demo && (
-                  <ProjectLink
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FaExternalLinkAlt /> {project.webOnly ? 'Live Demo' : 'Android'}
-                  </ProjectLink>
-                )}
-                {project.iosDemo && (
-                  <ProjectLink
-                    href={project.iosDemo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FaExternalLinkAlt /> iOS
-                  </ProjectLink>
-                )}
-              </ProjectLinks>
+
+              {renderLinks(project)}
             </ProjectContent>
           </ProjectCard>
         ))}
