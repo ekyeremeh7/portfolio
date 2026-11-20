@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
 import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
-import profilePicture from '../assets/profile-picture.jpg';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -36,7 +35,7 @@ const HeroContainer = styled.div`
   max-width: 1200px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
 
@@ -223,56 +222,6 @@ const MetricText = styled.span`
   }
 `;
 
-const HeroImage = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const spin = keyframes`
-  to { transform: rotate(360deg); }
-`;
-
-const ImageContainer = styled.div`
-  width: 300px;
-  height: 300px;
-  border-radius: ${radii.round};
-  background: ${gradients.accent};
-  padding: 4px;
-  position: relative;
-  isolation: isolate;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: -22px;
-    border-radius: ${radii.round};
-    background: conic-gradient(from 0deg, transparent 0deg, ${colors.primary} 90deg, transparent 180deg, ${colors.secondary} 270deg, transparent 360deg);
-    filter: blur(18px);
-    opacity: 0.5;
-    z-index: -1;
-    animation: ${spin} 9s linear infinite;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    border-radius: ${radii.round};
-    background: ${colors.background};
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: ${radii.round};
-    object-fit: cover;
-    object-position: center top;
-    position: relative;
-    z-index: 2;
-  }
-`;
-
 const Hero = () => {
   const sectionRef = useRef(null);
 
@@ -424,15 +373,6 @@ const Hero = () => {
           </SocialLinks>
         </HeroContent>
 
-        <HeroImage
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <ImageContainer>
-            <img src={profilePicture} alt="Emmanuel Kwabena Kyeremeh" />
-          </ImageContainer>
-        </HeroImage>
       </HeroContainer>
     </HeroSection>
   );
