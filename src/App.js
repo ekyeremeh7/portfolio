@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Process from './components/Process';
+import LaunchLog from './components/LaunchLog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ToastProvider from './components/Toast';
@@ -62,6 +63,7 @@ function App() {
                   <Skills />
                   <Projects />
                   <Process />
+                  <LaunchLog />
                   <Experience />
                   <Contact />
                 </>
