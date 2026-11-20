@@ -92,12 +92,12 @@ const TickerOuter = styled.div`
 
   &::before {
     left: 0;
-    background: linear-gradient(to right, rgba(10,10,10,0.95), rgba(10,10,10,0));
+    background: linear-gradient(to right, rgba(250,248,245,0.95), rgba(250,248,245,0));
   }
 
   &::after {
     right: 0;
-    background: linear-gradient(to left, rgba(10,10,10,0.95), rgba(10,10,10,0));
+    background: linear-gradient(to left, rgba(250,248,245,0.95), rgba(250,248,245,0));
   }
 `;
 
