@@ -10,8 +10,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0a0a0a;
-  color: #ffffff;
+  background-color: #faf8f5;
+  color: #1a1a1a;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -19,6 +19,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 html {
@@ -31,27 +39,27 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f1ede6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #cfc8bb;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #a9a193;
 }
 
 /* Selection */
 ::selection {
-  background: #00d4ff;
-  color: #000;
+  background: #d97706;
+  color: #fff;
 }
 
 /* Focus styles */
 *:focus {
-  outline: 2px solid #00d4ff;
+  outline: 2px solid #0d9488;
   outline-offset: 2px;
 }
 

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
-import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
-import profilePicture from '../assets/profile-picture.jpg';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -13,6 +12,16 @@ const HeroSection = styled.section`
   position: relative;
   padding: 70px 2rem 0;
   overflow: hidden;
+  --mx: 50%;
+  --my: 40%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(640px circle at var(--mx) var(--my), ${tints.primarySoft}, transparent 60%);
+    pointer-events: none;
+  }
 
   ${media.tablet} {
     padding: 2rem 1rem;
@@ -26,7 +35,7 @@ const HeroContainer = styled.div`
   max-width: 1200px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
 
@@ -213,40 +222,23 @@ const MetricText = styled.span`
   }
 `;
 
-const HeroImage = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ImageContainer = styled.div`
-  width: 300px;
-  height: 300px;
-  border-radius: ${radii.round};
-  background: ${gradients.accent};
-  padding: 4px;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    border-radius: ${radii.round};
-    background: ${colors.background};
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: ${radii.round};
-    object-fit: cover;
-    object-position: center top;
-    position: relative;
-    z-index: 2;
-  }
-`;
-
 const Hero = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || window.matchMedia('(pointer: coarse)').matches) return undefined;
+
+    const onMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    };
+
+    el.addEventListener('mousemove', onMove);
+    return () => el.removeEventListener('mousemove', onMove);
+  }, []);
+
   const handleResumeDownload = (e) => {
     e.preventDefault();
     const link = document.createElement('a');
@@ -258,7 +250,7 @@ const Hero = () => {
   };
 
   return (
-    <HeroSection id="home">
+    <HeroSection id="home" ref={sectionRef}>
       <HeroContainer>
         <HeroContent>
           <Greeting
@@ -381,15 +373,6 @@ const Hero = () => {
           </SocialLinks>
         </HeroContent>
 
-        <HeroImage
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <ImageContainer>
-            <img src={profilePicture} alt="Emmanuel Kwabena Kyeremeh" />
-          </ImageContainer>
-        </HeroImage>
       </HeroContainer>
     </HeroSection>
   );

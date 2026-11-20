@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Process from './components/Process';
+import LaunchLog from './components/LaunchLog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ToastProvider from './components/Toast';
@@ -29,6 +30,16 @@ const AppContainer = styled.div`
                 radial-gradient(circle at 80% 20%, ${tints.secondaryFaint} 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 3;
   }
 `;
 
@@ -52,6 +63,7 @@ function App() {
                   <Skills />
                   <Projects />
                   <Process />
+                  <LaunchLog />
                   <Experience />
                   <Contact />
                 </>

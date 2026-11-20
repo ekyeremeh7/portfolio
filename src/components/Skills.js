@@ -1,7 +1,6 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import styled from 'styled-components';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import {
   FaReact,
@@ -19,8 +18,10 @@ import {
   FaLayerGroup,
   FaRocket,
   FaBug,
+  FaMicrosoft,
+  FaChartBar,
 } from 'react-icons/fa';
-import { borders, colors, gradientText, radii, surfaces } from '../theme';
+import { borders, colors, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
 
 const SkillsSection = styled.section`
   padding: 5rem 2rem;
@@ -30,6 +31,10 @@ const SkillsSection = styled.section`
   border-radius: ${radii.xl};
   margin-top: 2rem;
   margin-bottom: 2rem;
+
+  ${media.tablet} {
+    padding: 4rem 1.25rem;
+  }
 `;
 
 const SectionLabel = styled(motion.div)`
@@ -64,114 +69,169 @@ const SectionSubtitle = styled(motion.p)`
   margin-bottom: 3rem;
 `;
 
-const scrollLeft = keyframes`
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+const Bento = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  ${media.tablet} {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const scrollRight = keyframes`
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-`;
-
-const TickerOuter = styled.div`
-  overflow: hidden;
+const Tile = styled(motion.div)`
   position: relative;
-  margin-bottom: 1rem;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  &::before {
-    left: 0;
-    background: linear-gradient(to right, rgba(10,10,10,0.95), rgba(10,10,10,0));
-  }
-
-  &::after {
-    right: 0;
-    background: linear-gradient(to left, rgba(10,10,10,0.95), rgba(10,10,10,0));
-  }
-`;
-
-const TickerTrack = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  width: max-content;
-  animation: ${scrollLeft} 28s linear infinite;
-  padding: 0.25rem 0;
-
-  &:hover {
-    animation-play-state: paused;
-  }
-`;
-
-const TickerTrackReverse = styled(TickerTrack)`
-  animation: ${scrollRight} 32s linear infinite;
-`;
-
-const TickerItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.1rem;
+  padding: 1.5rem;
   background: ${surfaces.card};
   border: 1px solid ${borders.subtle};
-  border-radius: ${radii.pill};
-  white-space: nowrap;
-  color: ${colors.textMuted};
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  border-radius: ${radii.lg};
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 
-  svg {
-    color: ${colors.primary};
-    font-size: 0.95rem;
-    flex-shrink: 0;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(400px circle at var(--tx, 50%) var(--ty, 0%), ${tints.primarySoft}, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
   &:hover {
     border-color: ${borders.primary};
-    color: ${colors.text};
+    transform: translateY(-4px);
+    box-shadow: ${shadows.accentLift};
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  grid-column: span ${({ $span }) => $span};
+
+  ${media.tablet} {
+    grid-column: auto;
   }
 `;
 
-const row1 = [
-  { name: 'Flutter',     icon: <FaMobile /> },
-  { name: 'Dart',        icon: <FaCode /> },
-  { name: 'Riverpod',    icon: <FaLayerGroup /> },
-  { name: 'GetX',        icon: <FaLayerGroup /> },
-  { name: 'Firebase',    icon: <FaServer /> },
-  { name: 'Supabase',    icon: <FaDatabase /> },
-  { name: 'React.js',    icon: <FaReact /> },
-  { name: 'Next.js',     icon: <FaReact /> },
-  { name: 'TypeScript',  icon: <FaCode /> },
-  { name: 'JavaScript',  icon: <FaJs /> },
-  { name: 'Tailwind CSS',icon: <FaCss3Alt /> },
-  { name: 'Hive',        icon: <FaDatabase /> },
+const TileHeader = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+  position: relative;
+`;
+
+const TileTitle = styled.h3`
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: ${colors.text};
+`;
+
+const TileCount = styled.span`
+  font-size: 0.75rem;
+  color: ${colors.textFaint};
+  font-variant-numeric: tabular-nums;
+`;
+
+const Chips = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+`;
+
+const Chip = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.8rem;
+  background: ${surfaces.raised};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.pill};
+  color: ${colors.textMuted};
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  svg {
+    color: ${colors.primary};
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    color: ${colors.text};
+    border-color: ${borders.primary};
+  }
+`;
+
+const groups = [
+  {
+    title: 'Mobile',
+    span: 2,
+    items: [
+      { name: 'Flutter', icon: <FaMobile /> },
+      { name: 'Dart', icon: <FaCode /> },
+      { name: 'Riverpod', icon: <FaLayerGroup /> },
+      { name: 'GetX', icon: <FaLayerGroup /> },
+      { name: 'Hive', icon: <FaDatabase /> },
+      { name: 'Google Maps', icon: <FaMapMarkedAlt /> },
+    ],
+  },
+  {
+    title: 'Backend & data',
+    span: 1,
+    items: [
+      { name: 'Firebase', icon: <FaServer /> },
+      { name: 'Supabase', icon: <FaDatabase /> },
+      { name: 'PostgreSQL', icon: <FaDatabase /> },
+      { name: 'Socket.IO', icon: <FaServer /> },
+    ],
+  },
+  {
+    title: 'Payments & realtime',
+    span: 1,
+    items: [
+      { name: 'Paystack', icon: <FaCreditCard /> },
+      { name: 'Stripe', icon: <FaCreditCard /> },
+      { name: 'Agora', icon: <FaVideo /> },
+    ],
+  },
+  {
+    title: 'Delivery & monitoring',
+    span: 2,
+    items: [
+      { name: 'GitHub Actions', icon: <FaGithub /> },
+      { name: 'Fastlane', icon: <FaRocket /> },
+      { name: 'Shorebird', icon: <FaRocket /> },
+      { name: 'Sentry', icon: <FaBug /> },
+      { name: 'Microsoft Clarity', icon: <FaMicrosoft /> },
+      { name: 'PostHog', icon: <FaChartBar /> },
+    ],
+  },
+  {
+    title: 'Web & tooling',
+    span: 3,
+    items: [
+      { name: 'React.js', icon: <FaReact /> },
+      { name: 'Next.js', icon: <FaReact /> },
+      { name: 'TypeScript', icon: <FaCode /> },
+      { name: 'JavaScript', icon: <FaJs /> },
+      { name: 'Tailwind CSS', icon: <FaCss3Alt /> },
+      { name: 'Vercel', icon: <FaCloud /> },
+      { name: 'Playwright', icon: <FaCode /> },
+    ],
+  },
 ];
 
-const row2 = [
-  { name: 'Paystack',       icon: <FaCreditCard /> },
-  { name: 'Stripe',         icon: <FaCreditCard /> },
-  { name: 'Socket.IO',      icon: <FaServer /> },
-  { name: 'Agora',          icon: <FaVideo /> },
-  { name: 'Google Maps',    icon: <FaMapMarkedAlt /> },
-  { name: 'PostgreSQL',     icon: <FaDatabase /> },
-  { name: 'GitHub Actions', icon: <FaGithub /> },
-  { name: 'Fastlane',       icon: <FaRocket /> },
-  { name: 'Shorebird',      icon: <FaRocket /> },
-  { name: 'Sentry',         icon: <FaBug /> },
-  { name: 'Vercel',         icon: <FaCloud /> },
-  { name: 'Playwright',     icon: <FaCode /> },
-];
+const handleTileMove = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--tx', `${e.clientX - rect.left}px`);
+  e.currentTarget.style.setProperty('--ty', `${e.clientY - rect.top}px`);
+};
 
 const Skills = () => {
   const ref = useRef(null);
@@ -200,36 +260,35 @@ const Skills = () => {
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.6, delay: 0.15 }}
       >
-        Hover to pause
+        Grouped by what I use them for
       </SectionSubtitle>
 
-      <motion.div
+      <Bento
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
-        <TickerOuter>
-          <TickerTrack>
-            {[...row1, ...row1].map((skill, i) => (
-              <TickerItem key={i}>
-                {skill.icon}
-                {skill.name}
-              </TickerItem>
-            ))}
-          </TickerTrack>
-        </TickerOuter>
-
-        <TickerOuter>
-          <TickerTrackReverse>
-            {[...row2, ...row2].map((skill, i) => (
-              <TickerItem key={i}>
-                {skill.icon}
-                {skill.name}
-              </TickerItem>
-            ))}
-          </TickerTrackReverse>
-        </TickerOuter>
-      </motion.div>
+        {groups.map((group) => (
+          <Tile
+            key={group.title}
+            $span={group.span}
+            onMouseMove={handleTileMove}
+          >
+            <TileHeader>
+              <TileTitle>{group.title}</TileTitle>
+              <TileCount>{group.items.length}</TileCount>
+            </TileHeader>
+            <Chips>
+              {group.items.map((skill) => (
+                <Chip key={skill.name}>
+                  {skill.icon}
+                  {skill.name}
+                </Chip>
+              ))}
+            </Chips>
+          </Tile>
+        ))}
+      </Bento>
     </SkillsSection>
   );
 };

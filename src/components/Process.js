@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useInView } from 'framer-motion';
-import { borders, colors, gradientText, media, radii, surfaces, tints } from '../theme';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
 
 const ProcessSection = styled.section`
   padding: 5rem 2rem;
@@ -131,6 +131,124 @@ const Divider = styled.div`
   }
 `;
 
+const PipelineWrap = styled(motion.div)`
+  max-width: 720px;
+  margin: 4rem auto 1rem;
+
+  ${media.tablet} {
+    margin-top: 3rem;
+  }
+`;
+
+const Terminal = styled.div`
+  background: ${colors.background};
+  border: 1px solid ${borders.subtle};
+  border-radius: ${radii.lg};
+  overflow: hidden;
+  box-shadow: ${shadows.accentLift};
+`;
+
+const TerminalBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  background: ${surfaces.card};
+  border-bottom: 1px solid ${borders.subtle};
+`;
+
+const TerminalDot = styled.span`
+  width: 10px;
+  height: 10px;
+  border-radius: ${radii.round};
+  background: ${borders.strong};
+`;
+
+const TerminalTitle = styled.span`
+  margin-left: 0.6rem;
+  font-size: 0.78rem;
+  color: ${colors.textFaint};
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+`;
+
+const TerminalBody = styled.div`
+  padding: 1.25rem 1.5rem;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 2;
+  color: ${colors.textMuted};
+
+  ${media.mobile} {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
+`;
+
+const TerminalLine = styled(motion.div)`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+
+  > span:first-child {
+    min-width: 0;
+  }
+`;
+
+const LineStatus = styled.span`
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: ${colors.primary};
+  font-weight: 600;
+`;
+
+const TimingFooter = styled.div`
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid ${borders.subtle};
+  display: grid;
+  gap: 0.9rem;
+`;
+
+const TimingRow = styled.div`
+  display: grid;
+  grid-template-columns: 70px 1fr 110px;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: ${colors.textSubtle};
+
+  ${media.mobile} {
+    grid-template-columns: 60px 1fr 90px;
+    gap: 0.6rem;
+  }
+`;
+
+const TimingBar = styled.div`
+  height: 6px;
+  background: ${surfaces.overlay};
+  border-radius: ${radii.pill};
+  overflow: hidden;
+`;
+
+const TimingFill = styled(motion.div)`
+  height: 100%;
+  border-radius: ${radii.pill};
+`;
+
+const TimingValue = styled.span`
+  text-align: right;
+  font-weight: 600;
+  color: ${colors.text};
+  font-variant-numeric: tabular-nums;
+`;
+
+const pipelineLines = [
+  { label: 'pre-build checks', status: 'passed' },
+  { label: 'multi-flavor build · APK · AAB · IPA', status: 'built' },
+  { label: 'code signing', status: 'signed' },
+  { label: 'App Store Connect upload', status: 'uploaded' },
+];
+
 const steps = [
   {
     numeral: 'I',
@@ -200,6 +318,69 @@ const Process = () => {
           </Step>
         ))}
       </StepsContainer>
+
+      <PipelineWrap
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+      >
+        <Terminal>
+          <TerminalBar>
+            <TerminalDot />
+            <TerminalDot />
+            <TerminalDot />
+            <TerminalTitle>release pipeline</TerminalTitle>
+          </TerminalBar>
+          <TerminalBody>
+            <div>$ git push origin main</div>
+            {pipelineLines.map((line, i) => (
+              <TerminalLine
+                key={line.label}
+                initial={{ opacity: 0, x: -10 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                transition={{ duration: 0.4, delay: 1 + i * 0.3 }}
+              >
+                <span>▸ {line.label}</span>
+                <LineStatus>{line.status}</LineStatus>
+              </TerminalLine>
+            ))}
+            <TerminalLine
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.4, delay: 2.4 }}
+            >
+              <span>release finished in</span>
+              <LineStatus>15 min</LineStatus>
+            </TerminalLine>
+          </TerminalBody>
+          <TimingFooter>
+            <TimingRow>
+              <span>Before</span>
+              <TimingBar>
+                <TimingFill
+                  style={{ background: colors.textFaint }}
+                  initial={{ width: 0 }}
+                  animate={isInView ? { width: '100%' } : { width: 0 }}
+                  transition={{ duration: 1.2, delay: 1 }}
+                />
+              </TimingBar>
+              <TimingValue>~4 hours</TimingValue>
+            </TimingRow>
+            <TimingRow>
+              <span>After</span>
+              <TimingBar>
+                <TimingFill
+                  style={{ background: gradients.accent }}
+                  initial={{ width: 0 }}
+                  animate={isInView ? { width: '6.25%' } : { width: 0 }}
+                  transition={{ duration: 0.8, delay: 1.4 }}
+                />
+              </TimingBar>
+              <TimingValue>15 min</TimingValue>
+            </TimingRow>
+          </TimingFooter>
+        </Terminal>
+      </PipelineWrap>
 
       <Divider />
     </ProcessSection>
