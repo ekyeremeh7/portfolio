@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
-import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces } from '../theme';
+import { borders, colors, gradients, gradientText, media, radii, shadows, surfaces, tints } from '../theme';
 import profilePicture from '../assets/profile-picture.jpg';
 
 const HeroSection = styled.section`
@@ -13,6 +13,16 @@ const HeroSection = styled.section`
   position: relative;
   padding: 70px 2rem 0;
   overflow: hidden;
+  --mx: 50%;
+  --my: 40%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(640px circle at var(--mx) var(--my), ${tints.primarySoft}, transparent 60%);
+    pointer-events: none;
+  }
 
   ${media.tablet} {
     padding: 2rem 1rem;
@@ -219,6 +229,10 @@ const HeroImage = styled(motion.div)`
   align-items: center;
 `;
 
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
+
 const ImageContainer = styled.div`
   width: 300px;
   height: 300px;
@@ -226,6 +240,19 @@ const ImageContainer = styled.div`
   background: ${gradients.accent};
   padding: 4px;
   position: relative;
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -22px;
+    border-radius: ${radii.round};
+    background: conic-gradient(from 0deg, transparent 0deg, ${colors.primary} 90deg, transparent 180deg, ${colors.secondary} 270deg, transparent 360deg);
+    filter: blur(18px);
+    opacity: 0.5;
+    z-index: -1;
+    animation: ${spin} 9s linear infinite;
+  }
 
   &::before {
     content: '';
@@ -247,6 +274,22 @@ const ImageContainer = styled.div`
 `;
 
 const Hero = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || window.matchMedia('(pointer: coarse)').matches) return undefined;
+
+    const onMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    };
+
+    el.addEventListener('mousemove', onMove);
+    return () => el.removeEventListener('mousemove', onMove);
+  }, []);
+
   const handleResumeDownload = (e) => {
     e.preventDefault();
     const link = document.createElement('a');
@@ -258,7 +301,7 @@ const Hero = () => {
   };
 
   return (
-    <HeroSection id="home">
+    <HeroSection id="home" ref={sectionRef}>
       <HeroContainer>
         <HeroContent>
           <Greeting
