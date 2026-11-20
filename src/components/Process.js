@@ -177,16 +177,27 @@ const TerminalBody = styled.div`
   font-size: 0.85rem;
   line-height: 2;
   color: ${colors.textMuted};
+
+  ${media.mobile} {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
 `;
 
 const TerminalLine = styled(motion.div)`
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 1rem;
-  flex-wrap: wrap;
+
+  > span:first-child {
+    min-width: 0;
+  }
 `;
 
 const LineStatus = styled.span`
+  flex-shrink: 0;
+  white-space: nowrap;
   color: ${colors.primary};
   font-weight: 600;
 `;
