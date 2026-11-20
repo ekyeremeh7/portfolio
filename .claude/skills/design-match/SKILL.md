@@ -7,6 +7,19 @@ description: Use when a project must be redesigned or brought in line with an ap
 
 Use this to make a codebase match an approved design "to a T", in the same way Lawrence's Gaddy design package is meant to be used: tokens as the source of truth, one source per screen, and a handoff doc that says what is built and what is not.
 
+## 0a. If no approved design exists yet (create it first)
+
+Do this before matching anything. It is how OBTRA and Gaddy were made.
+
+1. **Collect the brief.** The project brief document, any flyer or reference image from the founder, the users and their roles, and the market (for OBTRA: Ghana as well as global health software).
+2. **Ask for the one decision that matters:** the aesthetic direction. Propose 2 to 4 directions with a one-line personality each, plus a palette for the favoured one. Anchor the palette on colours the product already uses, so the redesign feels like the same product. Wait for approval.
+3. **Write the design prompt** from the approved direction: aesthetic, brand feel, every screen needed per role, and the interactions (swipe, tabs, map, dialogs).
+4. **Build one interactive canvas** with every screen (for Gaddy: 15 screens in one canvas; for OBTRA: 14 screens across 4 portals). Keep the screens as separate source files (HTML per screen plus a layout file).
+5. **Export** the screenshots, a PDF of the screens, and the screen sources into the project's `design/` folder. If the hosted canvas is private, rebuild it from those local files rather than relying on the link.
+6. **Extract tokens** into one source of truth (JSON), mirrored into CSS and the app's theme code. Only then start section 1.
+
+Gate: do not start matching until the direction and the canvas are approved.
+
 ## 0. Gather inputs
 
 Ask for, or locate, these before changing code:
